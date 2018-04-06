@@ -79,7 +79,7 @@ Arduino | LED
 Pin 13 | Anode(power)
 GND | Cathode(ground)
 
-Use this circuit diagram for reference:
+**Diagram:**
 <img class="aligncenter wp-image-110 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/blink.png" alt="" width="497" height="607" />
 
 ### The code
@@ -272,7 +272,7 @@ Pin 10 | LED 9
 Pin 11 | LED 10
 GND | GND
 
-Use this diagram for reference:
+**Diagram:**
 <img class="aligncenter wp-image-89 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/led_wave.png" alt="Led wave" width="600" height="528" />
 
 Led wave
@@ -452,7 +452,7 @@ Arduino | LED
 Pin13 | Power
 GND | GND
 
-Use this diagram for reference:
+**Diagram:**
 <img class="aligncenter wp-image-108 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/button.png" alt="" width="600" height="632" />
 
 ### The code
@@ -731,7 +731,8 @@ Pin4 | GND
 9v | PWR to motors
 GND | GND for motors
 
-Diagram:
+**Diagram:**
+
 <img class="wp-image-112 size-full aligncenter" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/motors.png" alt="" width="600" height="599" />
 
 ### The code
@@ -847,7 +848,7 @@ Arduino   |    LDR
 Analog0   |    pin1
 PWR       |    pin2
 
-Diagram:
+**Diagram:**
 
 <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/analog_read.png" alt="" width="600" height="783" />
 
@@ -939,6 +940,75 @@ GND       |   Cathode
 
 **Diagram:**
 
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/analog_write.png" alt="AnalogWrite" width="600" height="664" />
+
+### The code
+
+```
+// Fades an LED in and out, like a sleeping laptop
+
+const int LED = 9;
+int i = 0; //used to count up and down
+
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  // loop from 0 to 255 and increase the
+  // brightness of the LED each time we go through the loop
+  for (i = 0; i < 255; i++) {
+    analogWrite(LED, i);
+    delay(10); // wait a bit so we actually see the effect
+  }
+
+  // loop from 255 to 0 and decrease the
+  // brightness of the LED each time we go through the loop
+  for (i = 255; i > 0; i--) {
+    analogWrite(LED, i);
+    delay(10); // wait a bit so we actually see the effect
+  }
+}
+```
+Here we use a *for* loop to dim the LED, what is a for loop?
+It's a loop that is used when you want to do something a certain amount of times,
+for example if you want to start at 0 and repeat an action 50 times.
+
+It's typical syntax is:
+```
+for (starting value; value to end at; increase or decrease the value) {
+  stuff to do over and over
+}
+```
+
+In our case we are using it to increase then decrease the LED brightness,
+first we have it start at 0
+```
+int i = 0; //used to count up and down
+```
+Then each time we go through the loop we increase *i* by one and we set the LED brightness
+to *i*, since *i* increased each time the LED brightness does too, then we wait
+for 10 milliseconds(just enough so we see the pulsing but not see the LED blinking).
+We keep doing this till *i = 255* which means the LED is at maximum brightness.
+```
+// loop from 0 to 255 and increase the
+// brightness of the LED each time we go through the loop
+for (i = 0; i < 255; i++) {
+  analogWrite(LED, i);
+  delay(10); // wait a bit so we actually see the effect
+}
+```
+
+Then we do the opposite starting at 255 and count down to 0 and decrease the
+LED brightness each time.
+```
+// loop from 255 to 0 and decrease the
+// brightness of the LED each time we go through the loop
+for (i = 255; i > 0; i--) {
+  analogWrite(LED, i);
+  delay(10); // wait a bit so we actually see the effect
+}
+```
 
 #### Licensing:
 
