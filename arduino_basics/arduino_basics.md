@@ -273,6 +273,7 @@ Pin 11 | LED 10
 GND | GND
 
 **Diagram:**
+
 <img class="aligncenter wp-image-89 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/led_wave.png" alt="Led wave" width="600" height="528" />
 
 Led wave
@@ -453,6 +454,7 @@ Pin13 | Power
 GND | GND
 
 **Diagram:**
+
 <img class="aligncenter wp-image-108 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/button.png" alt="" width="600" height="632" />
 
 ### The code
