@@ -237,7 +237,8 @@ Wait again, this time so the LED stays off for a second.
 The end of the `void loop()` function.
 
 Now that you understand what the code does, try changing around some things,
-like the delay time, try lowering the delay time to really small amounts of time and see what happens.
+like the delay time, try lowering the delay time to really small amounts of time
+and see what happens, it's pretty interesting.
 
 ## LED waves
 
@@ -893,6 +894,51 @@ to the reading we get from the sensor:
   delay(val); // wait, using the reading from val as the wait time
 }
 ```
+
+## Dimming LEDs with analogWrite
+Now that you know how to read analog signals lets learn how to make analog signals
+with the Arduino.
+
+I mentioned in the Blinking LED section, that changing the delay times to small numbers
+between turning the LED on and off results in something "interesting",
+if you did that you would have noticed that as the delays got smaller you don't
+see the LED blinking anymore but instead it gets dimmer.
+
+This is [persistence of vision](https://en.wikipedia.org/wiki/Persistence_of_vision)
+you can do some pretty impressive stuff with it like [POV displays](https://learn.adafruit.com/search?q=POV&)
+which use just few LEDs in a line and when spun display words or drawings.
+
+The Arduino has hardware that can make analog signals on pins 9, 10, and 11
+To make analog signals on these pins we use the *analogWrite()* this takes the pin
+it is controlling and a value between 0 an 255 as the analog signal where 0 is off
+and 255 is maximum brightness, so this:
+```
+analogWrite(9, 128);
+```
+will set the brightness of an LED connected to pin 9 to 50%.
+analogWrite doesn't only have to be used to set an LEDs brightness, it can be used
+to control the speed of a motor, or change the sound of a buzzer and more.
+
+So, for this example we'll be pulsing an LED like on a sleeping laptop.
+
+**Parts:**
+
+* An Arduino.
+* An LED.
+* A 1k resistor.
+* A breadboard.
+
+### Wiring
+
+Put a 1k resistor between the cathode of the LED and ground.
+
+Arduino   |   LED
+----------|---------
+Pin9      |   Anode
+GND       |   Cathode
+
+**Diagram:**
+
 
 #### Licensing:
 
