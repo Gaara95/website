@@ -12,4 +12,4 @@ and discuss fixes for it, then make a pull request with the fixes.
 If you have improvements you'd like to add open a pull request.
 
 
-Remamber to be nice.
+Remember to be nice.
