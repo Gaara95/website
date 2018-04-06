@@ -987,7 +987,7 @@ first we have it start at 0
 int i = 0; //used to count up and down
 ```
 Then each time we go through the loop we increase *i* by one and we set the LED brightness
-to *i*, since *i* increased each time the LED brightness does too, then we wait
+to *i*, since *i* is increased each time the LED brightness does too, then we wait
 for 10 milliseconds(just enough so we see the pulsing but not see the LED blinking).
 We keep doing this till *i = 255* which means the LED is at maximum brightness.
 ```
