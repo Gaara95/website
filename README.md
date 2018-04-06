@@ -1,6 +1,6 @@
 # website
 
-These are the content files for our website.
+These are the content files for our website, written in Markdown.
 
 The Wordpress editor is a pain to use, it randomly reformats code snippets,
 removes HTML and generally causes chaos, so we write all our content in real text editors like 
