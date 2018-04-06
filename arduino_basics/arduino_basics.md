@@ -902,7 +902,7 @@ with the Arduino.
 
 I mentioned in the Blinking LED section, that changing the delay times to small numbers
 between turning the LED on and off results in something "interesting",
-if you did that you would have noticed that as the delays got smaller you don't
+if you did that you would have noticed that as the delays get smaller you don't
 see the LED blinking anymore but instead it gets dimmer.
 
 This is [persistence of vision](https://en.wikipedia.org/wiki/Persistence_of_vision)
