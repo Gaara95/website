@@ -1362,12 +1362,35 @@ long microsecondsToCentimeters(long microseconds)
   return microseconds /29 / 2;
 }
 ```
-The comments explain it but anyway:
+The comments explain it, but anyway:
 sound travels at 340 meters per second, 29 microsecond per centimeter.
 The ping goes out and back.
 So to turn *duration* into *cm* we divide *duration* by 29 and divide that by 2.
 and we use the *return* statement which just sends back the calculated value so
 it can be stored in *cm*
+
+## Rover
+Now that you know how to read sensors and control LEDs and motors, lets build a robot.
+So the robot we will build is going to be an obstacle avoiding robot, it will drive around
+and avoid things in it's way.
+
+We will make it a "car" robot so it is going to move around on wheels,
+and to sense it's surroundings will give it an ultrasonic rangefinder.
+
+**Parts:**
+
+* An Arduino.
+* An HC-SR04 ultrasonic sensor.
+* An L293D motor driver board.
+* A robot chassis.
+* Two DC motors.
+* A castor(it's a little rolly thing).
+* Two wheels that fit the motor shafts.
+* Two 9v batteries and accompanying battery clips.
+* Various screws and bolts to mount all this stuff to the robot chassis.
+
+## Wiring
+
 
 #### Licensing:
 
