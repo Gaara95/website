@@ -830,8 +830,12 @@ using the `analogRead()` function we can read the voltage applied to one of thes
 `analogRead()` returns a number between 0 and 1023 which represents voltages from
 0 to 5 volts.
 
-So for this example we'll have an Arduino read values form a light sensor (LDR)
-and blink an LED at a speed dependent on readings from the sensor.
+So for this example we'll have an Arduino read values form an LDR, which stands for
+light dependent resistor, in the darkness an LDRs resistance is quite high.
+When you shine light at it, it's resistance drops proportionally to how much light
+shines on it.
+
+And we'll blink an LED at a speed dependent on readings from the sensor.
 
 **Parts:**
 
@@ -1011,6 +1015,66 @@ for (i = 255; i > 0; i--) {
   delay(10); // wait a bit so we actually see the effect
 }
 ```
+
+## Serial communication
+So far we have used LEDs and buzzers as output devices, but what if you wanted to
+collect and read values from a sensor? For that we can use the USB port on the Arduino
+to communicate with a computer.
+
+So we're going to read from a light sensor and send the values to the computer
+using serial communication.
+
+**Parts:**
+
+* An Arduino.
+* An LDR (light sensor)
+* A 10k resistor.
+* A breadboard.
+
+### Wiring
+
+Arduino    |    LDR
+-----------|------------
+Analog0    |    pin1
+PWR        |    pin2
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/serial_comms.png" alt="Serial" width="600" height="721" />
+
+### The code
+
+```
+// sends values read from analog input 0
+// to a computer with serial print.
+
+const int sensor = 0; // the pin for the analog sensor
+
+int val = 0; // used to store the reading from the sensor
+
+void setup() {
+	// open the serial port to the computer
+	// and set the transmission speed to 9600 baud
+	Serial.begin(9600);
+
+	// analog pins are input by default
+}
+
+void loop() {
+	val = analogRead(sensor); // read the sensor
+	Serial.println(val); // send the value read from the sensor to the computer
+
+	delay(100); // wait between each send makes reading through the stuff easier
+}
+```
+In the *void setup()* function we open the serial connection to the computer
+and we set the transmission speed to 9600 baud, the baud rate is how many bits
+per second are sent over the connection.
+```
+Serial.begin(9600);
+```
+Also notice that we don't set the analog input pin as an input, this is because
+analog pins are set as inputs by default
 
 #### Licensing:
 
