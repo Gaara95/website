@@ -1043,6 +1043,9 @@ PWR        |    pin2
 <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/serial_comms.png" alt="Serial" width="600" height="721" />
 
 ### The code
+Once you have uploaded this to the board hit the *Serial monitor* button, which
+is in the top right corner of the Arduino IDE, this opens a new window where all
+the data coming from the Arduino is displayed.
 
 ```
 // sends values read from analog input 0
@@ -1074,7 +1077,19 @@ per second are sent over the connection.
 Serial.begin(9600);
 ```
 Also notice that we don't set the analog input pin as an input, this is because
-analog pins are set as inputs by default
+analog pins are set as inputs by default.
+
+Then in *void loop()* we read the sensor and use *Serial.println()* to send *val*
+to the computer, *Serial.println()* sends the value to the computer then makes a new
+line that way we have a column of values and not just a line of all the values.
+```
+Serial.println(val);
+```
+We add a delay of 100 milliseconds so there is a pause between each time *val* is
+sent to the computer, if you remove this the rate at which val is sent will be really
+high and flood the serial monitor.
+
+## 
 
 #### Licensing:
 
