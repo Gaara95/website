@@ -1146,18 +1146,55 @@ void loop(){
   if (val == HIGH) {           // check if the input is HIGH
     digitalWrite(buzzer, HIGH);  // turn buzzer ON
     if (pirState == LOW) {
-      //we have just turned on
+      // we only print if there is a change in state
       Serial.println("Something moves in the shadows!");
-      //we only want to print on the output change, not state
-      pirState = HIGH;
+      pirState = HIGH; // the motion began set pirState high
     }
   } else {
     digitalWrite(buzzer, LOW); //turn the buzzer OFF
-    if (pirState == HIGH){
-      //we have just turned off
+    if (pirState == HIGH) {
+      //we only want to print if there is a change in state
       Serial.println("The movement has ended.");
-      //we only want to print on the output change, not state
-      pirState = LOW;
+      pirState = LOW; // the motion began set pirState low
+    }
+  }
+}
+```
+
+In the setup function we set *MOTION_PIN* as an *INPUT_PULLUP*, this sets it as an input
+and pulls it up to 5v.
+```
+pinMode(MOTION_PIN, INPUT_PULLUP);
+```
+
+We start off assuming no motion is detected *int pirState = LOW;*.
+
+Then in the loop function we read the sensor and if it is
+detecting motion we turn the buzzer on and if there is no motion
+we turn the buzzer off.
+
+Now we don't want the Arduino to keep sending us messages if there is motion,
+we only want it to send us messages when the motion starts and when it ends,
+for this we use the trick from the button example and check if *pirState* *was*
+low before it became high and only then send a message.
+We also only send a message when the motion ends if *pirState* was high before
+it became low.
+```
+void loop(){
+  val = digitalRead(inputPin);  // read input value
+  if (val == HIGH) {           // check if the input is HIGH
+    digitalWrite(buzzer, HIGH);  // turn buzzer ON
+    if (pirState == LOW) {
+      // we only print if there is a change in state
+      Serial.println("Something moves in the shadows!");
+      pirState = HIGH; // the motion began set pirState high
+    }
+  } else {
+    digitalWrite(buzzer, LOW); //turn the buzzer OFF
+    if (pirState == HIGH) {
+      //we only want to print if there is a change in state
+      Serial.println("The movement has ended.");
+      pirState = LOW; // the motion has ended set pirState low
     }
   }
 }
