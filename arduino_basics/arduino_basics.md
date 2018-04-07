@@ -1089,7 +1089,8 @@ We add a delay of 100 milliseconds so there is a pause between each time *val* i
 sent to the computer, if you remove this the rate at which val is sent will be really
 high and flood the serial monitor.
 
-## 
+## Motion Alarm
+
 
 #### Licensing:
 
