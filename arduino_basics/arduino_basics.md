@@ -1,5 +1,4 @@
-These are a set of projects made to take you from not knowing anything about
-Arduinos, up to making robots.
+These are the projects used in our Arduino-basics summer camp.
 
 We will cover setting up a programming environment, wiring up sensors,
 the basic electronics, and coding for the Arduino.
@@ -1090,7 +1089,79 @@ sent to the computer, if you remove this the rate at which val is sent will be r
 high and flood the serial monitor.
 
 ## Motion Alarm
+Now lets use a more advanced sensor: a PIR motion sensor, which is  basically an infrared light
+detector, when a person or object moves in the sensors field of view they cause changes
+in the temperature across the room, the sensor sees these changes in temperature
+(which is changes in infrared light) as movement.
 
+The PIR sensors signal pin is an Open-collector which means when it detects motion
+it pull its output pin *LOW* and when there is no motion detected the pin is left floating
+(it is not set HIGH or LOW), this means that we need to pull the pin up to prevent noise.
+Luckily the Arduino has builtin pullup resistors on most of its pins.
+
+We will be building a motion alarm, which will beep a buzzer whenever it detects motion,
+it will also send a message over serial when motion is detected.
+
+**Parts:**
+
+* An Arduino.
+* A PIR motion sensor (also called a D-sun sometimes).
+* A buzzer.
+* A breadboard.
+
+### Wiring
+
+The buzzer does not need a resistor like an LED.
+
+Arduino     |     buzzer & sensor
+------------|-----------------
+pin 13      |     buzzer
+pin 2       |     Input from the PIR sensor
+GND         |     GND
+PWR         |     PWR
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/motion_alarm.png" alt="motion" width="644" height="588" />
+
+### The code
+
+```
+//Beeps a buzzer when motion is detected.
+
+int buzzer = 13;                // the pin for the buzzer
+int inputPin = 2;               // input pin (for PIR sensor)
+int pirState = LOW;             // we start, assuming no motion detected
+int val = 0;                    // variable for reading the pin status
+
+void setup() {
+  pinMode(buzzer, OUTPUT);      // declare buzzer as output
+  pinMode(MOTION_PIN, INPUT_PULLUP);     // declare sensor as input, and internally pull it up                  
+
+  Serial.begin(9600);
+}
+
+void loop(){
+  val = digitalRead(inputPin);  // read input value
+  if (val == HIGH) {           // check if the input is HIGH
+    digitalWrite(buzzer, HIGH);  // turn buzzer ON
+    if (pirState == LOW) {
+      //we have just turned on
+      Serial.println("Something moves in the shadows!");
+      //we only want to print on the output change, not state
+      pirState = HIGH;
+    }
+  } else {
+    digitalWrite(buzzer, LOW); //turn the buzzer OFF
+    if (pirState == HIGH){
+      //we have just turned off
+      Serial.println("The movement has ended.");
+      //we only want to print on the output change, not state
+      pirState = LOW;
+    }
+  }
+}
+```
 
 #### Licensing:
 
