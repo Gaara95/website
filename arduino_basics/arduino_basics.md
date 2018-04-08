@@ -1416,23 +1416,39 @@ PWR         |     PWR
 
 ### Building the robot
 
-unscrew the big nut on the motors:
+* unscrew the big nut on the motors:
 
-And send the motors axle side through the mounting hole on the chassis:
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly1.jpg" alt="assembly1" width="600" height="536" />
 
-Then screw on the nut back to the motors:
+* And send the motors axle side through the mounting hole on the chassis:
 
-Now slide the wheels onto the motors axles and tighten the screws on the motors
-till the wheels are firmly connected to the motors,
-don't tighten too much or you could ruin the threading on the wheels:
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly2.jpg" alt="assembly2" width="600" height="612" />
 
-Now with the screws and nuts mount the castor to the bottom front of the chassis:
+* Then screw on the nut back to the motors:
 
-Use screws to mount the Arduino to the top of the chassis:
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly3.jpg" alt="assembly3" width="600" height="496" />
 
-Use more screws to mount the ultrasonic sensor to the front of the chassis:
+* Now slide the wheels onto the motors axles and tighten the screws on the motors
+  till the wheels are firmly connected to the motors,
+  don't tighten too much or you could ruin the threading on the wheels:
 
-Screw the motor driver board to the top of the chassis:
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly4.jpg" alt="assembly4" width="600" height="856" />
+
+* Now with screws and nuts mount the castor to the bottom front of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly5.jpg" alt="assembly5" width="702" height="600" />
+
+* Use screws to mount the Arduino to the top of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly6" width="600" height="536" />
+
+* Use more screws to mount the ultrasonic sensor to the front of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
+
+* Screw the motor driver board to the top of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
 
 ### The code
 ```
