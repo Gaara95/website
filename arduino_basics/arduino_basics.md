@@ -1,5 +1,4 @@
-These are a set of projects made to take you from not knowing anything about
-Arduinos, up to making robots.
+These are the projects used in our Arduino-basics summer camp.
 
 We will cover setting up a programming environment, wiring up sensors,
 the basic electronics, and coding for the Arduino.
@@ -273,6 +272,7 @@ Pin 11 | LED 10
 GND | GND
 
 **Diagram:**
+
 <img class="aligncenter wp-image-89 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/led_wave.png" alt="Led wave" width="600" height="528" />
 
 Led wave
@@ -453,6 +453,7 @@ Pin13 | Power
 GND | GND
 
 **Diagram:**
+
 <img class="aligncenter wp-image-108 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/button.png" alt="" width="600" height="632" />
 
 ### The code
@@ -828,8 +829,12 @@ using the `analogRead()` function we can read the voltage applied to one of thes
 `analogRead()` returns a number between 0 and 1023 which represents voltages from
 0 to 5 volts.
 
-So for this example we'll have an Arduino read values form a light sensor (LDR)
-and blink an LED at a speed dependent on readings from the sensor.
+So for this example we'll have an Arduino read values form an LDR, which stands for
+light dependent resistor, in the darkness an LDRs resistance is quite high.
+When you shine light at it, it's resistance drops proportionally to how much light
+shines on it.
+
+And we'll blink an LED at a speed dependent on readings from the sensor.
 
 **Parts:**
 
@@ -1007,6 +1012,703 @@ LED brightness each time.
 for (i = 255; i > 0; i--) {
   analogWrite(LED, i);
   delay(10); // wait a bit so we actually see the effect
+}
+```
+
+## Serial communication
+So far we have used LEDs and buzzers as output devices, but what if you wanted to
+collect and read values from a sensor? For that we can use the USB port on the Arduino
+to communicate with a computer.
+
+So we're going to read from a light sensor and send the values to the computer
+using serial communication.
+
+**Parts:**
+
+* An Arduino.
+* An LDR (light sensor)
+* A 10k resistor.
+* A breadboard.
+
+### Wiring
+
+Arduino    |    LDR
+-----------|------------
+Analog0    |    pin1
+PWR        |    pin2
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/serial_comms.png" alt="Serial" width="600" height="721" />
+
+### The code
+Once you have uploaded this to the board hit the *Serial monitor* button, which
+is in the top right corner of the Arduino IDE, this opens a new window where all
+the data coming from the Arduino is displayed.
+
+```
+// sends values read from analog input 0
+// to a computer with serial print.
+
+const int sensor = 0; // the pin for the analog sensor
+
+int val = 0; // used to store the reading from the sensor
+
+void setup() {
+	// open the serial port to the computer
+	// and set the transmission speed to 9600 baud
+	Serial.begin(9600);
+
+	// analog pins are input by default
+}
+
+void loop() {
+	val = analogRead(sensor); // read the sensor
+	Serial.println(val); // send the value read from the sensor to the computer
+
+	delay(100); // wait between each send makes reading through the stuff easier
+}
+```
+In the *void setup()* function we open the serial connection to the computer
+and we set the transmission speed to 9600 baud, the baud rate is how many bits
+per second are sent over the connection.
+```
+Serial.begin(9600);
+```
+Also notice that we don't set the analog input pin as an input, this is because
+analog pins are set as inputs by default.
+
+Then in *void loop()* we read the sensor and use *Serial.println()* to send *val*
+to the computer, *Serial.println()* sends the value to the computer then makes a new
+line that way we have a column of values and not just a line of all the values.
+```
+Serial.println(val);
+```
+We add a delay of 100 milliseconds so there is a pause between each time *val* is
+sent to the computer, if you remove this the rate at which val is sent will be really
+high and flood the serial monitor.
+
+## Motion Alarm
+Now lets use a more advanced sensor: a PIR motion sensor, which is  basically an infrared light
+detector, when a person or object moves in the sensors field of view they cause changes
+in the temperature across the room, the sensor sees these changes in temperature
+(which is changes in infrared light) as movement.
+
+The PIR sensors signal pin is an Open-collector which means when it detects motion
+it pull its output pin *LOW* and when there is no motion detected the pin is left floating
+(it is not set HIGH or LOW), this means that we need to pull the pin up to prevent noise.
+Luckily the Arduino has builtin pullup resistors on most of its pins.
+
+For this segment we will be building a motion alarm, which will beep a buzzer
+and send a message to a computer whenever it detects motion.
+
+**Parts:**
+
+* An Arduino.
+* A PIR motion sensor (also called a D-sun sometimes).
+* A buzzer.
+* A breadboard.
+
+### Wiring
+
+The buzzer does not need a resistor like an LED.
+
+Arduino     |     buzzer & sensor
+------------|-----------------
+pin 13      |     buzzer
+pin 2       |     Input from the PIR sensor
+GND         |     GND
+PWR         |     PWR
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/motion_alarm.png" alt="motion" width="644" height="588" />
+
+### The code
+
+```
+//Beeps a buzzer and sends a message over serial when motion is detected.
+
+int buzzer = 13;                // the pin for the buzzer
+int inputPin = 2;               // input pin (for PIR sensor)
+int pirState = LOW;             // we start, assuming no motion detected
+int val = 0;                    // variable for reading the pin status
+
+void setup() {
+  pinMode(buzzer, OUTPUT);      // declare buzzer as output
+  pinMode(MOTION_PIN, INPUT_PULLUP);     // declare sensor as input, and internally pull it up
+
+  Serial.begin(9600);
+}
+
+void loop(){
+  val = digitalRead(inputPin);  // read input value
+  if (val == HIGH) {           // check if the input is HIGH
+    digitalWrite(buzzer, HIGH);  // turn buzzer ON
+    if (pirState == LOW) {
+      // we only print if there is a change in state
+      Serial.println("Something moves in the shadows!");
+      pirState = HIGH; // the motion began set pirState high
+    }
+  } else {
+    digitalWrite(buzzer, LOW); //turn the buzzer OFF
+    if (pirState == HIGH) {
+      //we only want to print if there is a change in state
+      Serial.println("The movement has ended.");
+      pirState = LOW; // the motion began set pirState low
+    }
+  }
+}
+```
+
+In the setup function we set *MOTION_PIN* as an *INPUT_PULLUP*, this sets it as an input
+and pulls it up to 5v.
+```
+pinMode(MOTION_PIN, INPUT_PULLUP);
+```
+
+We start off assuming no motion is detected *int pirState = LOW;*.
+
+Then in the loop function we read the sensor and if it is
+detecting motion we turn the buzzer on and if there is no motion
+we turn the buzzer off.
+
+Now, we don't want the Arduino to keep sending us messages if there is motion,
+we only want it to send us messages when the motion starts and when it ends,
+for this we use the trick from the button example and check if *pirState* *was*
+low before it became high and only then send a message.
+We also only send a message when the motion ends if *pirState* *was* high before
+it became low.
+```
+void loop(){
+  val = digitalRead(inputPin);  // read input value
+  if (val == HIGH) {           // check if the input is HIGH
+    digitalWrite(buzzer, HIGH);  // turn buzzer ON
+    if (pirState == LOW) {
+      // we only print if there is a change in state
+      Serial.println("Something moves in the shadows!");
+      pirState = HIGH; // the motion began set pirState high
+    }
+  } else {
+    digitalWrite(buzzer, LOW); //turn the buzzer OFF
+    if (pirState == HIGH) {
+      //we only want to print if there is a change in state
+      Serial.println("The movement has ended.");
+      pirState = LOW; // the motion has ended set pirState low
+    }
+  }
+}
+```
+
+## Rangefinder
+Now lets use another complex sensor: an ultrasonic rangefinder, these use ultrasonic
+sound to tell how far away an object is from it, exactly like [bats echolocation](https://en.wikipedia.org/wiki/Bat#Echolocation).
+It does this by sending an ultrasonic *ping* and then waiting for it to return,
+by measuring how long it takes for the *ping* to return we can calculate how far
+an object is from it.
+
+For this segment we will make an Arduino blink an LED, or buzz a buzzer(or both)
+at a rate dependent on how close an object is to it.
+
+**Parts:**
+
+* An Arduino.
+* An HC-SR04 ultrasonic sensor.
+* An LED or buzzer(or both).
+* A breadboard.
+* A 1k resistor if you use an LED.
+
+### Wiring
+
+If you use an LED dont forget its resistor.
+
+Arduino     |     HC-SR04
+------------|-----------------
+pin 12      |     Trigger (ping)
+pin 11      |     Echo (input)
+GND         |     GND
+PWR         |     PWR
+
+Arduino     |     LED and,or buzzer
+------------|---------------
+Pin13       |     Power
+GND         |     GND
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/rangefinder.png" alt="rangefinder" width="477" height="599" />
+
+### The code
+
+```
+// rangefinder using the HC-SR04 ultrasonic sensor
+
+// the ultrasonic sensors pins
+const int trigger = 12; // sends a ping
+const int echo = 11; // reads the ping
+
+const int LED = 13; // the LED or buzzer
+
+void setup() {
+  pinMode(trigger, OUTPUT); // set the trigger as output
+  pinMode(echo, INPUT); // set the reader as input
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+
+  long duration, cm; // used to calculate distance
+
+  // send a ping
+  digitalWrite(trigger, LOW); // pull it low for a clean ping
+  delayMicroseconds(2);
+  digitalWrite(trigger, HIGH); // send the ping
+  delayMicroseconds(5);
+  digitalWrite(trigger, LOW); // pull it low again
+
+  // store the time it takes for the ping to return
+  duration = pulseIn(echo, HIGH);
+  // convert the time it takes into centimeters
+  cm = microsecondsToCentimeters(duration);
+
+  /*
+  depending on how far away a detected object is, blink an LED or beep a buzzer.
+  We do this by letting the LED/buzzer be on or off for the distance
+  of an object multiplied by 10
+  we multiply by ten so the waits are longer else you wouldn't notice them.
+  */
+  if ((cm > 1) and (cm < 20)) { // ignore stuff closer than 1 cm and further than 20 cm.
+    digitalWrite(LED, HIGH);
+    delay(cm * 10);
+    digitalWrite(LED, LOW);
+    delay(cm * 10);
+  }
+}
+
+/*
+function that converts the ping time reading to distance
+*/
+long microsecondsToCentimeters(long microseconds)
+{
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the
+  // object we take half of the distance traveled.
+  return microseconds /29 / 2;
+}
+```
+
+When the trigger pin on the sensor is set HIGH the sensor sends a *ping*, and
+when the ping returns the echo pin goes high.
+
+In the loop function we have two *long* variables: duration and cm.
+A *long* variable is a variable in which you can store larger sizes of data,
+we use it since *duration* and *cm* can become quite large the further away an
+object is from the sensor.
+```
+long duration, cm;
+```
+duration is used to store how long it takes for the ping to return and cm is used
+to store the objects distance from the sensor.
+
+Then we send the outgoing ping, before we send the ping we pull the trigger pin
+low so there is no noise in the ping.
+```
+digitalWrite(trigger, LOW); // pull it low for a clean ping
+delayMicroseconds(2);
+digitalWrite(trigger, HIGH); // send the ping
+delayMicroseconds(5);
+digitalWrite(trigger, LOW); // pull it low again
+```
+Notice how we use *delayMicroseconds()* instead of *delay()*, this is because the
+*pings* have to be really small pulses of sound.
+
+After the ping is sent we use the *pulseIn()* function to measure how long it takes
+for *echo* to read *HIGH*, the *pulseIn()* function takes a pin as the first argument
+and the second argument is the expected state of the pin, it basically reads the
+pin continuously till the value read from the pin matches the expected value and
+returns the time taken till the values matched in microseconds.
+In our case it reads the *echo* pin and returns the time it took to become *HIGH*,
+and we store the time in *duration*.
+```
+// store the time it takes for the ping to return
+duration = pulseIn(echo, HIGH);
+// convert the time it takes into centimeters
+cm = microsecondsToCentimeters(duration);
+```
+Then we do *cm = microsecondsToCentimeters(duration);* which calls the function
+to convert the time it took into centimeters and store that in *cm*, I'll explain that later.
+
+Then we use an if statement to filter out objects further than 20 centimeters and
+close than 1 centimeter.
+```
+if ((cm > 1) and (cm < 20)) { // ignore stuff closer than 1 cm and further than 20 cm.
+  digitalWrite(LED, HIGH);
+  delay(cm * 10);
+  digitalWrite(LED, LOW);
+  delay(cm * 10);
+}
+```
+Inside the if statement we blink an LED or buzz a buzzer, and we set the delay times
+to the distance of the object from the sensor multiplied by 10, we multiply by
+10 so the delays are big enough.
+
+Now, onto the interesting bit, this function takes *duration* and turns it into *cm*
+```
+long microsecondsToCentimeters(long microseconds)
+{
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the
+  // object we take half of the distance traveled.
+  return microseconds /29 / 2;
+}
+```
+The comments explain it, but anyway:
+sound travels at 340 meters per second, 29 microsecond per centimeter.
+The ping goes out and back.
+So to turn *duration* into *cm* we divide *duration* by 29 and divide that by 2.
+and we use the *return* statement which just sends back the calculated value so
+it can be stored in *cm*
+
+## Rover
+Now that you know how to read sensors and control LEDs and motors, lets build a robot.
+So the robot we will build is going to be an obstacle avoiding robot, it will drive around
+and avoid things in it's way.
+
+We will make it a "car" robot so it is going to move around on wheels,
+and to sense it's surroundings will give it an ultrasonic rangefinder.
+
+**Parts:**
+
+* An Arduino.
+* An HC-SR04 ultrasonic sensor.
+* An L293D motor driver board.
+* A robot chassis.
+* Two DC motors.
+* A castor(it's a little rolly thing).
+* Two wheels that fit the motor shafts.
+* Two 9v batteries and accompanying battery clips.
+* Various screws and bolts to mount all this stuff to the robot chassis.
+* A screwdriver.
+
+### Building the robot
+
+* unscrew the big nut on the motors:
+
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly1.jpg" alt="assembly1" width="600" height="536" />
+
+* And send the motors axle side through the mounting hole on the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly2.jpg" alt="assembly2" width="600" height="612" />
+
+* Then screw on the nut back to the motors:
+
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly3.jpg" alt="assembly3" width="600" height="496" />
+
+* Now slide the wheels onto the motors axles and tighten the screws on the motors
+  till the wheels are firmly connected to the motors,
+  don't tighten too much or you could ruin the threading on the wheels:
+
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly4.jpg" alt="assembly4" width="600" height="856" />
+
+* Now with screws and nuts mount the castor to the bottom front of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly5.jpg" alt="assembly5" width="702" height="600" />
+
+* Use screws to mount the Arduino to the top of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly6" width="600" height="536" />
+
+* Use more screws to mount the ultrasonic sensor to the front of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
+
+* Screw the motor driver board to the top of the chassis:
+
+  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
+
+
+## Wiring
+
+Arduino     |     Motor driver
+------------|-----------------
+pin 0       |     Enable motor a
+pin 1       |     Motor a pin 1
+pin 2       |     Motor a pin 2
+pin 3       |     PWR
+pin 4       |     GND
+pin 5       |     Enable motor b
+pin 6       |     Motor b pin 2
+pin 7       |     Motor b pin 1
+
+Arduino     |     HC-SR04
+------------|-----------------
+pin 12      |     Trigger (ping)
+pin 11      |     Echo (input)
+GND         |     GND
+PWR         |     PWR
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/rover.png" alt="rover" width="600" height="600" />
+
+### The code
+```
+// an obstacle avoiding robot
+
+long randNumber; // used to store the random number.
+
+// assign the motor controller pins
+int ea = 0; //enable a
+// motor one
+int a1 = 1;
+int a2 = 2;
+int eb = 5; // enable b
+// motor two
+int b2 = 6;
+int b1 = 7;
+int V = 3; // power to the motor controller
+int G = 4; // ground to the motor controller
+// the ultrasonic sensors pins
+const int trigger = 12;
+const int echo = 11;
+
+/*
+function used to make the robot back up and then turn left
+*/
+void backLeft() {
+  // back up for a second
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+  // turn left for a second
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, HIGH);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+}
+
+/*
+function used to make the robot back up and then turn right
+*/
+void backRight() {
+  // back up for a second
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+  // turn right for a second
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, HIGH);
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+}
+
+// the setup stuff
+void setup() {
+  // setup the motor controller pins
+  pinMode(ea, OUTPUT);
+  pinMode(a1, OUTPUT);
+  pinMode(a2, OUTPUT);
+  pinMode(V, OUTPUT);
+  pinMode(G, INPUT);
+  pinMode(eb, OUTPUT);
+  pinMode(b2, OUTPUT);
+  pinMode(b1, OUTPUT);
+  // turn the motor driver on and enable both motors
+  digitalWrite(ea, HIGH);
+  digitalWrite(eb, HIGH);
+  digitalWrite(V, HIGH);
+  digitalWrite(G, LOW);
+  pinMode(trigger, OUTPUT);
+  pinMode(echo, INPUT);
+}
+
+void loop() {
+  // the ping stuff
+  long duration, cm;
+  // send a ping
+  digitalWrite(trigger, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(trigger, LOW);
+
+  // listen for a return
+  duration = pulseIn(echo, HIGH);
+  // convert the time of the ping into cm
+  cm = microsecondsToCentimeters(duration);
+  // put random in a variable
+  randNumber = random(0, 2);
+
+  // the avoidance stuff
+  // filter out values less than 1 and greater than 20 cm
+  if (cm > 1){
+    if (cm < 20){
+    // based on randNumber turn left (0) or right(1)
+      if (randNumber == 0){
+        backLeft();
+      }
+      if (randNumber == 1){
+        backRight();
+      }
+    } else { // if there isn't anything in front just go straight
+        digitalWrite(a1, HIGH);
+        digitalWrite(a2, LOW);
+        digitalWrite(b1, HIGH);
+        digitalWrite(b2, LOW);
+        delay(150);
+    }
+  }
+}
+
+/*
+function that converts the ping time reading to distance
+*/
+long microsecondsToCentimeters(long microseconds)
+{
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the
+  // object we take half of the distance travelled.
+  return microseconds /29 / 2;
+}
+```
+For this project we want the robot to avoid objects by backing away from them then
+turning left or right, and going forward again, to make the Arduino randomly decide
+which way to turn after avoiding an object we use the *random()* function to choose
+a random number from 0 and 1, and based on that the Arduino turns left(0) or right(1).
+
+*random()* takes two arguments the first one is the lower limit of the random value
+and the second one is the upper bound and is excluded from the random range, so
+*random(0, 2)* generates a number from 0 to 1 not 0 to 2.
+
+To turn left or right requires quite a bit of code so to keep things neat we put
+those instructions in functions.
+To do this we make the Arduino drive back for one second then spin one motor
+back while the other stays off, turning the robot:
+```
+void backLeft() {
+  // back up for a second
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+  // turn left for a second
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, HIGH);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+}
+```
+
+Then in the loop we send a ping and store it's duration, this is also where we
+generate our random number:
+```
+void loop() {
+  // the ping stuff
+  long duration, cm;
+  // send a ping
+  digitalWrite(trigger, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(trigger, LOW);
+
+  // listen for a return
+  duration = pulseIn(echo, HIGH);
+  // convert the time of the ping into cm
+  cm = microsecondsToCentimeters(duration);
+  // put random in a variable
+  randNumber = random(0, 2);
+```
+
+This code does the obstacle avoiding:
+```
+// the avoidance stuff
+// filter out values less than 1 and greater than 20 cm
+if (cm > 1){
+  if (cm < 20){
+  // based on randNumber turn left (0) or right(1)
+    if (randNumber == 0){
+      backLeft();
+    }
+    if (randNumber == 1){
+      backRight();
+    }
+  } else { // if there isn't anything in front just go straight
+      digitalWrite(a1, HIGH);
+      digitalWrite(a2, LOW);
+      digitalWrite(b1, HIGH);
+      digitalWrite(b2, LOW);
+      delay(150);
+  }
+}
+```
+We use if statements to see if anything is in the way:
+```
+if (cm > 1){
+  if (cm < 20){
+```
+if there is an obstacle we turn left if randNumber is 0 and right if randNumber is 1:
+```
+// based on randNumber turn left (0) or right(1)
+  if (randNumber == 0){
+    backLeft();
+  }
+  if (randNumber == 1){
+    backRight();
+  }
+```
+If there are no obstacles in the way we make the robot drive forward:
+```
+} else { // if there isn't anything in front just go straight
+    digitalWrite(a1, HIGH);
+    digitalWrite(a2, LOW);
+    digitalWrite(b1, HIGH);
+    digitalWrite(b2, LOW);
+    delay(150);
 }
 ```
 
