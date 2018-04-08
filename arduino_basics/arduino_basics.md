@@ -1416,15 +1416,23 @@ PWR         |     PWR
 
 ### Building the robot
 
-**Mounting the motors and castor:**
-
 unscrew the big nut on the motors:
 
-and send the motors axle side through the mounting hole on the chassis:
+And send the motors axle side through the mounting hole on the chassis:
 
-and then screw on the nut back to the motor:
+Then screw on the nut back to the motors:
+
+Now slide the wheels onto the motors axles and tighten the screws on the motors
+till the wheels are firmly connected to the motors,
+don't tighten too much or you could ruin the threading on the wheels:
 
 Now with the screws and nuts mount the castor to the bottom front of the chassis:
+
+Use screws to mount the Arduino to the top of the chassis:
+
+Use more screws to mount the ultrasonic sensor to the front of the chassis:
+
+Screw the motor driver board to the top of the chassis:
 
 ### The code
 ```
