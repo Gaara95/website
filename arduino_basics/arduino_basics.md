@@ -1390,30 +1390,6 @@ and to sense it's surroundings will give it an ultrasonic rangefinder.
 * Various screws and bolts to mount all this stuff to the robot chassis.
 * A screwdriver.
 
-## Wiring
-
-Arduino     |     Motor driver
-------------|-----------------
-pin 0       |     Enable motor a
-pin 1       |     Motor a pin 1
-pin 2       |     Motor a pin 2
-pin 3       |     PWR
-pin 4       |     GND
-pin 5       |     Enable motor b
-pin 6       |     Motor b pin 2
-pin 7       |     Motor b pin 1
-
-Arduino     |     HC-SR04
-------------|-----------------
-pin 12      |     Trigger (ping)
-pin 11      |     Echo (input)
-GND         |     GND
-PWR         |     PWR
-
-**Diagram:**
-
-<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/rover.png" alt="rover" width="600" height="600" />
-
 ### Building the robot
 
 * unscrew the big nut on the motors:
@@ -1450,11 +1426,36 @@ PWR         |     PWR
 
   <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
 
+
+## Wiring
+
+Arduino     |     Motor driver
+------------|-----------------
+pin 0       |     Enable motor a
+pin 1       |     Motor a pin 1
+pin 2       |     Motor a pin 2
+pin 3       |     PWR
+pin 4       |     GND
+pin 5       |     Enable motor b
+pin 6       |     Motor b pin 2
+pin 7       |     Motor b pin 1
+
+Arduino     |     HC-SR04
+------------|-----------------
+pin 12      |     Trigger (ping)
+pin 11      |     Echo (input)
+GND         |     GND
+PWR         |     PWR
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/rover.png" alt="rover" width="600" height="600" />
+
 ### The code
 ```
 // an obstacle avoiding robot
 
-long randNumber; // load random to a long
+long randNumber; // used to store the random number.
 
 // assign the motor controller pins
 int ea = 0; //enable a
@@ -1468,8 +1469,8 @@ int b1 = 7;
 int V = 3; // power to the motor controller
 int G = 4; // ground to the motor controller
 // the ultrasonic sensors pins
-const int pingO = 12;
-const int pingI = 11;
+const int trigger = 12;
+const int echo = 11;
 
 /*
 function used to make the robot back up and then turn left
@@ -1542,42 +1543,33 @@ void setup() {
   pinMode(eb, OUTPUT);
   pinMode(b2, OUTPUT);
   pinMode(b1, OUTPUT);
-  /*
-    analog input 0 is used as a random noise source
-    to seed the random number genrator.
-    the analog noise that analog 0 picks up
-    is the source of randomness
-  */
-  randomSeed(analogRead(5));
   // turn the motor driver on and enable both motors
   digitalWrite(ea, HIGH);
   digitalWrite(eb, HIGH);
   digitalWrite(V, HIGH);
   digitalWrite(G, LOW);
-  pinMode(pingO, OUTPUT);
-  pinMode(pingI, INPUT);
+  pinMode(trigger, OUTPUT);
+  pinMode(echo, INPUT);
 }
 
-// the main loop
 void loop() {
   // the ping stuff
   long duration, cm;
   // send a ping
-  digitalWrite(pingO, LOW);
+  digitalWrite(trigger, LOW);
   delayMicroseconds(2);
-  digitalWrite(pingO, HIGH);
+  digitalWrite(trigger, HIGH);
   delayMicroseconds(5);
-  digitalWrite(pingO, LOW);
+  digitalWrite(trigger, LOW);
 
   // listen for a return
-  duration = pulseIn(pingI, HIGH);
+  duration = pulseIn(echo, HIGH);
   // convert the time of the ping into cm
   cm = microsecondsToCentimeters(duration);
   // put random in a variable
   randNumber = random(0, 2);
 
   // the avoidance stuff
-
   // filter out values less than 1 and greater than 20 cm
   if (cm > 1){
     if (cm < 20){
@@ -1607,6 +1599,116 @@ long microsecondsToCentimeters(long microseconds)
   // The ping travels out and back, so to find the distance of the
   // object we take half of the distance travelled.
   return microseconds /29 / 2;
+}
+```
+For this project we want the robot to avoid objects by backing away from them then
+turning left or right, and going forward again, to make the Arduino randomly decide
+which way to turn after avoiding an object we use the *random()* function to choose
+a random number from 0 and 1, and based on that the Arduino turns left(0) or right(1).
+
+*random()* takes two arguments the first one is the lower limit of the random value
+and the second one is the upper bound and is excluded from the random range, so
+*random(0, 2)* generates a number from 0 to 1 not 0 to 2.
+
+To turn left or right requires quite a bit of code so to keep things neat we put
+those instructions in functions.
+To do this we make the Arduino drive back for one second then spin one motor
+back while the other stays off, turning the robot:
+```
+void backLeft() {
+  // back up for a second
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+  // turn left for a second
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, HIGH);
+  delay(1000);
+  // stop the motors
+  digitalWrite(a1, LOW);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, LOW);
+  delay(10);
+}
+```
+
+Then in the loop we send a ping and store it's duration, this is also where we
+generate our random number:
+```
+void loop() {
+  // the ping stuff
+  long duration, cm;
+  // send a ping
+  digitalWrite(trigger, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigger, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(trigger, LOW);
+
+  // listen for a return
+  duration = pulseIn(echo, HIGH);
+  // convert the time of the ping into cm
+  cm = microsecondsToCentimeters(duration);
+  // put random in a variable
+  randNumber = random(0, 2);
+```
+
+This code does the obstacle avoiding:
+```
+// the avoidance stuff
+// filter out values less than 1 and greater than 20 cm
+if (cm > 1){
+  if (cm < 20){
+  // based on randNumber turn left (0) or right(1)
+    if (randNumber == 0){
+      backLeft();
+    }
+    if (randNumber == 1){
+      backRight();
+    }
+  } else { // if there isn't anything in front just go straight
+      digitalWrite(a1, HIGH);
+      digitalWrite(a2, LOW);
+      digitalWrite(b1, HIGH);
+      digitalWrite(b2, LOW);
+      delay(150);
+  }
+}
+```
+We use if statements to see if anything is in the way:
+```
+if (cm > 1){
+  if (cm < 20){
+```
+if there is an obstacle we turn left if randNumber is 0 and right if randNumber is 1:
+```
+// based on randNumber turn left (0) or right(1)
+  if (randNumber == 0){
+    backLeft();
+  }
+  if (randNumber == 1){
+    backRight();
+  }
+```
+If there are no obstacles in the way we make the robot drive forward:
+```
+} else { // if there isn't anything in front just go straight
+    digitalWrite(a1, HIGH);
+    digitalWrite(a2, LOW);
+    digitalWrite(b1, HIGH);
+    digitalWrite(b2, LOW);
+    delay(150);
 }
 ```
 
