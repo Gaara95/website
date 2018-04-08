@@ -1388,9 +1388,33 @@ and to sense it's surroundings will give it an ultrasonic rangefinder.
 * Two wheels that fit the motor shafts.
 * Two 9v batteries and accompanying battery clips.
 * Various screws and bolts to mount all this stuff to the robot chassis.
+* A screwdriver.
 
 ## Wiring
 
+Arduino     |     Motor driver
+------------|-----------------
+pin 0       |     Enable motor a
+pin 1       |     Motor a pin 1
+pin 2       |     Motor a pin 2
+pin 3       |     PWR
+pin 4       |     GND
+pin 5       |     Enable motor b
+pin 6       |     Motor b pin 2
+pin 7       |     Motor b pin 1
+
+Arduino     |     HC-SR04
+------------|-----------------
+pin 12      |     Trigger (ping)
+pin 11      |     Echo (input)
+GND         |     GND
+PWR         |     PWR
+
+**Diagram:**
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/rover.png" alt="rover" width="600" height="600" />
+
+### Building the robot
 
 #### Licensing:
 
