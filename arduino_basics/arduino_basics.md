@@ -1375,7 +1375,7 @@ So the robot we will build is going to be an obstacle avoiding robot, it will dr
 and avoid things in it's way.
 
 We will make it a "car" robot so it is going to move around on wheels,
-and to sense it's surroundings will give it an ultrasonic rangefinder.
+and to sense it's surroundings we will give it an ultrasonic rangefinder.
 
 **Powering the Arduino with a battery**
 
@@ -1388,7 +1388,7 @@ to a power regulation circuit, so it can take 7 to 12 volts and conver it to 5 v
 for the processor.
 
 So to power the Arduino with the 9volt battery plug the positive terminal into *vin*
-and the negative terminal into *GND*
+and the negative terminal into *GND*.
 
 **Parts:**
 
@@ -1431,11 +1431,11 @@ and the negative terminal into *GND*
   then put the Arduino and motor driver on it, the layer of paper is to stop the
   Arduino and motor driver from shorting on the metal chassis:
 
-  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly6" width="600" height="536" />
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly6.jpg" alt="assembly6" width="601" height="600" />
 
 * Use screws to mount the ultrasonic sensor to the front of the chassis:
 
-  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
+  <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly7.jpg" alt="assembly1" width="746" height="600" />
 
 
 ## Wiring
