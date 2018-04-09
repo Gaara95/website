@@ -1600,11 +1600,11 @@ void loop() {
         backRight();
       }
     } else { // if there isn't anything in front just go straight
-        digitalWrite(a1, HIGH);
-        digitalWrite(a2, LOW);
-        digitalWrite(b1, HIGH);
-        digitalWrite(b2, LOW);
-        delay(150);
+      digitalWrite(a1, HIGH);
+      digitalWrite(a2, LOW);
+      digitalWrite(b1, HIGH);
+      digitalWrite(b2, LOW);
+      delay(150);
     }
   }
 }
@@ -1697,11 +1697,11 @@ if (cm > 1){
       backRight();
     }
   } else { // if there isn't anything in front just go straight
-      digitalWrite(a1, HIGH);
-      digitalWrite(a2, LOW);
-      digitalWrite(b1, HIGH);
-      digitalWrite(b2, LOW);
-      delay(150);
+    digitalWrite(a1, HIGH);
+    digitalWrite(a2, LOW);
+    digitalWrite(b1, HIGH);
+    digitalWrite(b2, LOW);
+    delay(150);
   }
 }
 ```
@@ -1723,11 +1723,11 @@ if there is an obstacle we turn left if randNumber is 0, and right if randNumber
 If there are no obstacles in the way we make the robot drive forward:
 ```
 } else { // if there isn't anything in front just go straight
-    digitalWrite(a1, HIGH);
-    digitalWrite(a2, LOW);
-    digitalWrite(b1, HIGH);
-    digitalWrite(b2, LOW);
-    delay(150);
+  digitalWrite(a1, HIGH);
+  digitalWrite(a2, LOW);
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(150);
 }
 ```
 
