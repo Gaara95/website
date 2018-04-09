@@ -135,7 +135,7 @@ the same bunch of code *over and over* whenever you want it to be executed, you
 just stick it in curly brackets and call it whenever you want it to run.
 
 You can see two blocks of code defined this way here, and before them there are these lines:
-`void setup()` and `void loop()`
+*void setup()* and *void loop()*
 These lines give a name to the function, if you want to write a block of code
 that makes an Arduino open a door(for example), you would write:
 ```
@@ -150,9 +150,9 @@ openDoor();
 ```
 from anywhere in your code, and the Arduino will execute the commands to open the door.
 
-Now, Arduino expects two functions to exist: `setup()` and `loop()`. `setup()`
+Now, Arduino expects two functions to exist: *setup()* and *loop()*. *setup()*
 is where you put all the code you want to execute once at the beginning of the
-program, hence the name *setup*, and `loop()` is where you put code to be executed
+program, hence the name *setup*, and *loop()* is where you put code to be executed
 over and over until you turn off the Arduino, or the end of time.
 This is done because the Arduino is not like a regular computer -it can't do
 multiple things at once and programs can't quit. When you turn on the Arduino,
@@ -163,37 +163,37 @@ the code runs and when you want to stop it, you just turn it off.
 ```
 //blinks an LED
 ```
-This is a comment, any line beginning with `//` is a comment and the Arduino
+This is a comment, any line beginning with *//* is a comment and the Arduino
 ignores it, comments are used to write notes explaining what the code does and
 wherever necessary, how it works.
 
 ```
 const int LED = 13;
 ```
-here we are assigning LED to pin 13 on the Arduino, `const int` means `LED` is
+here we are assigning LED to pin 13 on the Arduino, *const int* means *LED* is
 an integer that can't be changed.
 
 ```
 void setup()
 ```
-This tells the Arduino that the next block of code is called `setup()`.
+This tells the Arduino that the next block of code is called *setup()*.
 
 ```
 {
 ```
-The opening of the `setup()` function.
+The opening of the *setup()* function.
 
 ```
 pinMode(LED, OUTPUT);
 ```
-`pinMode` tells the Arduino how to configure a given pin, here we are setting `LED`,
+*pinMode* tells the Arduino how to configure a given pin, here we are setting *LED*,
 which is pin 13, to OUTPUT so we can drive the LED, pins can be set as INPUT,
 to read from sensors, or OUTPUT to drive LED's and other things.
 
 ```
 }
 ```
-The end of the `setup()` function.
+The end of the *setup()* function.
 
 ```
 void loop()
@@ -203,21 +203,21 @@ This is the main function of the code, it repeats over and over until the Arduin
 ```
 {
 ```
-The opening of the `void loop()` function.
+The opening of the *void loop()* function.
 
 ```
 digitalWrite(LED, HIGH);
 ```
-`digitalWrite()` turns on and off any pin that has been configured as an `OUTPUT`.
-The first argument that it takes is the pin it's controlling (which in this case is `LED`),
+*digitalWrite()* turns on and off any pin that has been configured as an *OUTPUT*.
+The first argument that it takes is the pin it's controlling (which in this case is *LED*),
 the second argument is either HIGH which turns the pin on, or LOW which turns the pin off.
 
 ```
 delay(1000);
 ```
 This line tells the Arduino to wait for a second, this is done so the LED stays on,
-if we removed it the Arduino would immediately go from `digitalWrite(LED, HIGH);`
-to `digitalWrite(LED, LOW);` and turn the LED off right after it's turned on.
+if we removed it the Arduino would immediately go from *digitalWrite(LED, HIGH);*
+to *digitalWrite(LED, LOW);* and turn the LED off right after it's turned on.
 Delay takes arguments in milliseconds, 1000 milliseconds = one second.
 
 ```
@@ -233,7 +233,7 @@ Wait again, this time so the LED stays off for a second.
 ```
 }
 ```
-The end of the `void loop()` function.
+The end of the *void loop()* function.
 
 Now that you understand what the code does, try changing around some things,
 like the delay time, try lowering the delay time to really small amounts of time
@@ -390,7 +390,7 @@ void setup() {
   pinMode(LED10, OUTPUT);
 }
 ```
-Then in the `void setup()` function we set all 10 LEDs as OUTPUTS.
+Then in the *void setup()* function we set all 10 LEDs as OUTPUTS.
 
 ```
 /*
@@ -407,7 +407,7 @@ void loop() {
   delay(500);
   ...
 ```
-Now in the `loop()` function we start switching on the LED's one by one with
+Now in the *loop()* function we start switching on the LED's one by one with
 half second delays in between, (the rising edge of the wave).
 
 ```
@@ -460,7 +460,7 @@ GND | GND
 
 **Version 1:**
 Turns on the LED while the button is pressed and turns it off when the button is released.
-For this you will use the `digitalRead()` function, it is used to read signals from pins,
+For this you will use the *digitalRead()* function, it is used to read signals from pins,
 it can tell if there is any voltage applied to the pin and returns 'HIGH' or 'LOW'.
 
 ```
@@ -489,10 +489,10 @@ void loop() {
 }
 ```
 How does this work?
-First we read the button and store its status in val: `val = digitalRead(BUTTON);`
+First we read the button and store its status in val: *val = digitalRead(BUTTON);*
 
 The if statement:
-The `if` statement is possibly the most important part of a programming language,
+The *if* statement is possibly the most important part of a programming language,
 since it enables the computer to make choices.
 The usual structure of an if statement goes like this:
 ```
@@ -503,20 +503,20 @@ if (some condition is fulfilled) {
 }
 ```
 After an if statement you have the condition to be fulfilled, in our case "is the button pressed?"
-If the button is pressed the code in the if statement is run, if the button is not pressed the code in the `else` statement is run.
+If the button is pressed the code in the if statement is run, if the button is not pressed the code in the *else* statement is run.
 Notice how in the if statement we use == instead of =, this is because in every programming
-language = is used to assign a value to something, like: `apple = red`
+language = is used to assign a value to something, like: *apple = red*
 and == is used to compare two things it returs *True* if the two things are equal
-and *False* if they are not equal, like: `apple == good` which checks if *apple* is equal to *good*.
+and *False* if they are not equal, like: *apple == good* which checks if *apple* is equal to *good*.
 
 **Version 2:**
 Holding down the button to keep the light on is sub-optimal, so lets change it
 to stay on after the button is pressed.
 
 For this we will use a *variable*, a variable is used to store something in
-memory, like so: `int val = 0;` here we are saying val is an integer and that
+memory, like so: *int val = 0;* here we are saying val is an integer and that
 its value is 0, variables can be changed later in the code so you could do
-`val = 300;` and vals value would become 300.
+*val = 300;* and vals value would become 300.
 
 ```
 //Turn on an LED when the button is pressed and keep it on after it is released.
@@ -825,8 +825,8 @@ So far we have learned how to read if a sensor is *on* or *off*, but what if you
 want to use a light sensor, which can tell us whether or not there is light, as well as
 *how much* light there is, to read such a sensor we use the analog input pins on
 an Arduino they're the ones on the lower right of the board, marked *A0* to *A5*,
-using the `analogRead()` function we can read the voltage applied to one of these pins.
-`analogRead()` returns a number between 0 and 1023 which represents voltages from
+using the *analogRead()* function we can read the voltage applied to one of these pins.
+*analogRead()* returns a number between 0 and 1023 which represents voltages from
 0 to 5 volts.
 
 So for this example we'll have an Arduino read values form an LDR, which stands for
@@ -1731,9 +1731,9 @@ If there are no obstacles in the way we make the robot drive forward:
 }
 ```
 
-#### Licensing:
+##### Licensing:
 
-This tutorial and all its content is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License, which can be found [here](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+Tutorials are under the Creative Commons Attribution-ShareAlike 4.0 International License
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 

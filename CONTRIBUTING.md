@@ -3,6 +3,8 @@
 * All documents must be in Markdown
 * All images should use the HTML image tags (the images are stored on the site)
 * All documents should have a licensing notice at the bottom
+* Italicize inline code instead of using the inline code tags, the theme we use
+  makes inline code look awful.
 
 ## Pull requests and issues
 
