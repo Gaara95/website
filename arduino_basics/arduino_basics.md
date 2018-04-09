@@ -1369,13 +1369,26 @@ So to turn *duration* into *cm* we divide *duration* by 29 and divide that by 2.
 and we use the *return* statement which just sends back the calculated value so
 it can be stored in *cm*
 
-## Rover
+## Roamer
 Now that you know how to read sensors and control LEDs and motors, lets build a robot.
 So the robot we will build is going to be an obstacle avoiding robot, it will drive around
 and avoid things in it's way.
 
 We will make it a "car" robot so it is going to move around on wheels,
 and to sense it's surroundings will give it an ultrasonic rangefinder.
+
+**Powering the Arduino with a battery**
+
+The processor on the Arduino can only take upto 5 volts, more than that and it can
+burn up, so far we used a USB port connected to a computer to power it and USB ports
+deliver 5v power so we were fine, but for the robot we use 9volt batteries,
+so how do we power the Arduino with 9volt batteries and not burn it? Well to
+power it with batteries we can use the *vin* on the Arduino, this pin is connected
+to a power regulation circuit, so it can take 7 to 12 volts and conver it to 5 volts
+for the processor.
+
+So to power the Arduino with the 9volt battery plug the positive terminal into *vin*
+and the negative terminal into *GND*
 
 **Parts:**
 
@@ -1384,7 +1397,7 @@ and to sense it's surroundings will give it an ultrasonic rangefinder.
 * An L293D motor driver board.
 * A robot chassis.
 * Two DC motors.
-* A castor(it's a little rolly thing).
+* A castor(used as a third wheel, it can move in any direction).
 * Two wheels that fit the motor shafts.
 * Two 9v batteries and accompanying battery clips.
 * Various screws and bolts to mount all this stuff to the robot chassis.
@@ -1414,20 +1427,19 @@ and to sense it's surroundings will give it an ultrasonic rangefinder.
 
   <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly5.jpg" alt="assembly5" width="702" height="600" />
 
-* Use screws to mount the Arduino to the top of the chassis:
+* Put a layer of plastic or paper on the top of the chassis
+  then put the Arduino and motor driver on it, the layer of paper is to stop the
+  Arduino and motor driver from shorting on the metal chassis:
 
   <img class="aligncenter wp-image-147 size-full" src="" alt="assembly6" width="600" height="536" />
 
-* Use more screws to mount the ultrasonic sensor to the front of the chassis:
-
-  <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
-
-* Screw the motor driver board to the top of the chassis:
+* Use screws to mount the ultrasonic sensor to the front of the chassis:
 
   <img class="aligncenter wp-image-147 size-full" src="" alt="assembly1" width="600" height="536" />
 
 
 ## Wiring
+
 
 Arduino     |     Motor driver
 ------------|-----------------
@@ -1446,6 +1458,13 @@ pin 12      |     Trigger (ping)
 pin 11      |     Echo (input)
 GND         |     GND
 PWR         |     PWR
+
+Motor driver     |     Motors
+-----------------|----------------
+terminalA1       |     motorA wire 1
+terminalA2       |     motorA wire 2
+terminalB1       |     motorB wire 1
+terminalB2       |     motorB wire 2
 
 **Diagram:**
 
