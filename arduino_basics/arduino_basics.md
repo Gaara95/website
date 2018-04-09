@@ -79,6 +79,7 @@ Pin 13 | Anode(power)
 GND | Cathode(ground)
 
 **Diagram:**
+
 <img class="aligncenter wp-image-110 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/blink.png" alt="" width="497" height="607" />
 
 ### The code
