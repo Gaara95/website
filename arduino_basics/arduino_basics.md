@@ -1095,7 +1095,7 @@ in the temperature across the room, the sensor sees these changes in temperature
 (which is changes in infrared light) as movement.
 
 The PIR sensors signal pin is an Open-collector which means when it detects motion
-it pull its output pin *LOW* and when there is no motion detected the pin is left floating
+it pulls its output pin *LOW* and when there is no motion detected the pin is left floating
 (it is not set HIGH or LOW), this means that we need to pull the pin up to prevent noise.
 Luckily the Arduino has builtin pullup resistors on most of its pins.
 
@@ -1336,10 +1336,10 @@ duration = pulseIn(echo, HIGH);
 cm = microsecondsToCentimeters(duration);
 ```
 Then we do *cm = microsecondsToCentimeters(duration);* which calls the function
-to convert the time it took into centimeters and store that in *cm*, I'll explain that later.
+to convert the time it took into centimeters and store that in *cm* (I'll explain that later.)
 
 Then we use an if statement to filter out objects further than 20 centimeters and
-close than 1 centimeter.
+closer than 1 centimeter.
 ```
 if ((cm > 1) and (cm < 20)) { // ignore stuff closer than 1 cm and further than 20 cm.
   digitalWrite(LED, HIGH);
@@ -1363,7 +1363,7 @@ long microsecondsToCentimeters(long microseconds)
 }
 ```
 The comments explain it, but anyway:
-sound travels at 340 meters per second, 29 microsecond per centimeter.
+sound travels at 340 meters per second, 29 microseconds per centimeter.
 The ping goes out and back.
 So to turn *duration* into *cm* we divide *duration* by 29 and divide that by 2.
 and we use the *return* statement which just sends back the calculated value so
@@ -1405,7 +1405,7 @@ and the negative terminal into *GND*
 
 ### Building the robot
 
-* unscrew the big nut on the motors:
+* Unscrew the big nut on the motors:
 
   <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly1.jpg" alt="assembly1" width="600" height="536" />
 
@@ -1710,7 +1710,7 @@ We use if statements to see if anything is in the way:
 if (cm > 1){
   if (cm < 20){
 ```
-if there is an obstacle we turn left if randNumber is 0 and right if randNumber is 1:
+if there is an obstacle we turn left if randNumber is 0, and right if randNumber is 1:
 ```
 // based on randNumber turn left (0) or right(1)
   if (randNumber == 0){
