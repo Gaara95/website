@@ -18,7 +18,7 @@ at a rate dependent on how close an object is to it.
 
 ### Wiring
 
-If you use an LED dont forget its resistor.
+If you use an LED don't forget its resistor.
 
 Arduino     |     HC-SR04
 ------------|-----------------
