@@ -1,4 +1,3 @@
-## Weather Station
 This is the final project for this course, we will build a weather station that
 measures temperature, humidity, light levels, absolute and sea-level corrected
 air pressure, and  altitude.
@@ -93,3 +92,42 @@ lcd.setCursor(1, 0);
 ```
 The screen has 2 lines and 16 columns, so *lcd.setCursor(1, 5);* would send the
 cursor to line 2 and column 5 (we count from 0).
+
+### Wiring up the sensors
+Now that the screen works add the sensors:
+
+If you have a 4 pin version of the DHT11 put a 10k resistor between the signal
+pin and power.
+
+Arduino    |    DHT11
+-----------|-------------
+Pin7       |    OUT
+GND        |    GND
+5v         |    PWR
+
+Warning the BMP180 is a 3volt sensor do not power it with 5volts.
+On different Arduinos the SDA and SCL pins are different so look up which
+pins the SCL and SDA pins are for your specific Arduino.
+
+Arduino    |    BMP180
+-----------|-------------
+SDA        |    SDA
+SCL        |    SCL
+GND        |    GND
+3v3        |    PWR
+
+Arduino    |    Rain sensor
+-----------|----------------
+Pin8       |    DO
+GND        |    GND
+PWR        |    PWR
+
+**Diagram of just the sensors:**
+
+
+
+##### Licensing:
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+All the code in this tutorial is licensed under the MIT license, the exact terms for which can be found [here](https://github.com/afshaan4/other_arduino_projects/blob/master/LICENSE)
