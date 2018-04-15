@@ -12,6 +12,7 @@ stuff, this is a monochrome LCD which can display 2 rows of 16 characters at a t
 * A DHT11 temperature/humidity sensor.
 * A rain sensor.
 * A JHD 162A LCD.
+* An LDR.
 * A 220 ohm resistor.
 * A 1k resistor.
 * A 10k resistor.
