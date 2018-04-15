@@ -1,4 +1,3 @@
-## LED waves
 
 Now that you learned to control one LED let's try controlling ten.
 For this project we will connect 10 LED's to the Arduino and light them up in a sequence, making a wave.

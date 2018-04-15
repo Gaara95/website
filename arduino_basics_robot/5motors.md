@@ -1,4 +1,3 @@
-## Driving motors
 Now that you learned how to drive small loads like LEDs and take inputs,
 lets drive bigger loads, like motors.
 

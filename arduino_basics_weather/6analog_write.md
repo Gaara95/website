@@ -1,4 +1,3 @@
-## Making analog signals
 Now that you know how to read analog signals lets learn how to make analog signals
 with the Arduino.
 

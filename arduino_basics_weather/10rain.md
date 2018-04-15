@@ -1,4 +1,3 @@
-## Rain sensors
 We want the weather we are going to build to be able to tell if it is raining or not,
 for that we will use a "rain sensor" this is basically a pad with metal traces on
 it, when water falls on it current flows through the metal traces.

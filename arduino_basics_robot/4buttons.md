@@ -1,5 +1,3 @@
-## Taking input with buttons
-
 Now that you know how to control LEDs lets learn how to take inputs.
 
 **Parts:**

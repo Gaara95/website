@@ -1,4 +1,3 @@
-## Serial communication
 So far we have used LEDs and buzzers as output devices, but what if you wanted to
 collect and read values from a sensor? For that we can use the USB port on the Arduino
 to communicate with a computer.

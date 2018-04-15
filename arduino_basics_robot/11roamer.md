@@ -1,4 +1,3 @@
-## Roamer
 Now that you know how to read sensors and control LEDs and motors, lets build a robot.
 So the robot we will build is going to be an obstacle avoiding robot, it will drive around
 and avoid things in it's way.

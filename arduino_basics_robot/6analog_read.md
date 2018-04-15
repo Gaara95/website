@@ -1,4 +1,3 @@
-## Reading analog signals
 So far we have learned how to read if a sensor is *on* or *off*, but what if you
 want to use a light sensor, which can tell us whether or not there is light, as well as
 *how much* light there is, to read such a sensor we use the analog input pins on

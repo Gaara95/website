@@ -1,4 +1,3 @@
-## Rangefinder
 Now lets use another complex sensor: an ultrasonic rangefinder, these use ultrasonic
 sound to tell how far away an object is from it, exactly like [bats echolocation](https://en.wikipedia.org/wiki/Bat#Echolocation).
 It does this by sending an ultrasonic *ping* and then waiting for it to return,

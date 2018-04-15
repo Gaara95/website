@@ -1,4 +1,3 @@
-## Motion Alarm
 Now lets use a more advanced sensor: a PIR motion sensor, which is  basically an infrared light
 detector, when a person or object moves in the sensors field of view they cause changes
 in the temperature across the room, the sensor sees these changes in temperature

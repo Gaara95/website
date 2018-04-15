@@ -1,5 +1,3 @@
-## Blinking an LED
-
 We'll start with the most basic project: blinking an LED.
 
 **Parts:**
