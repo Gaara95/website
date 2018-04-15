@@ -3,19 +3,19 @@ So the robot we will build is going to be an obstacle avoiding robot, it will dr
 and avoid things in it's way.
 
 We will make it a "car" robot so it is going to move around on wheels,
-and to sense it's surroundings we will give it an ultrasonic rangefinder.
+and to sense it's surroundings we will give it an ultrasonic range-finder.
 
 **Powering the Arduino with a battery**
 
-The processor on the Arduino can only take upto 5 volts, more than that and it can
+The processor on the Arduino can only take up-to 5 volts, more than that and it can
 burn up, so far we used a USB port connected to a computer to power it and USB ports
-deliver 5v power so we were fine, but for the robot we use 9volt batteries,
-so how do we power the Arduino with 9volt batteries and not burn it? Well to
+deliver 5v power so we were fine, but for the robot we use 9 volt batteries,
+so how do we power the Arduino with 9 volt batteries and not burn it? Well to
 power it with batteries we can use the *vin* on the Arduino, this pin is connected
-to a power regulation circuit, so it can take 7 to 12 volts and conver it to 5 volts
+to a power regulation circuit, so it can take 7 to 12 volts and convert it to 5 volts
 for the processor.
 
-So to power the Arduino with the 9volt battery plug the positive terminal into *vin*
+So to power the Arduino with the 9volt, battery plug the positive terminal into *vin*
 and the negative terminal into *GND*.
 
 **Parts:**
@@ -244,7 +244,7 @@ long microsecondsToCentimeters(long microseconds)
 {
   // The speed of sound is 340 m/s or 29 microseconds per centimeter.
   // The ping travels out and back, so to find the distance of the
-  // object we take half of the distance travelled.
+  // object we take half of the distance traveled.
   return microseconds /29 / 2;
 }
 ```

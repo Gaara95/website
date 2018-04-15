@@ -6,7 +6,7 @@ in the temperature across the room, the sensor sees these changes in temperature
 The PIR sensors signal pin is an Open-collector which means when it detects motion
 it pulls its output pin *LOW* and when there is no motion detected the pin is left floating
 (it is not set HIGH or LOW), this means that we need to pull the pin up to prevent noise.
-Luckily the Arduino has builtin pullup resistors on most of its pins.
+Luckily the Arduino has built-in pull up resistors on most of its pins.
 
 For this segment we will be building a motion alarm, which will beep a buzzer
 and send a message to a computer whenever it detects motion.
