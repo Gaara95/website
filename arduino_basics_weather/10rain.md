@@ -1,6 +1,6 @@
-We want the weather we are going to build to be able to tell if it is raining or not,
-for that we will use a "rain sensor" this is basically a pad with metal traces on
-it, when water falls on it current flows through the metal traces.
+We want the weather station we are going to build to be able to tell if it is
+raining or not, for that we will use a "rain sensor" this is basically a pad with
+metal traces on it, when water falls on it current flows through the metal traces.
 
 The pad with the metal traces is connected to a board which is used to tune the
 sensitivity of the sensor and change whether it sends a *HIGH* or *LOW* when it
@@ -53,8 +53,8 @@ void setup() {
 void loop()  {
 	val =  digitalRead(rainSensor);
 
-    //the sensor returns HIGH if there is no rain
-    //and LOW when there is rain
+  //the sensor returns HIGH if there is no rain
+  //and LOW when there is rain
 	if(val == HIGH) {
 		digitalWrite(LED, LOW);
 	} else {

@@ -3,8 +3,7 @@ to do that we will be using a DHT11 sensor.
 
 This sensor is not a simple *on/off* or analog sensor, to use it we need to use a
 *library*, a library is a bunch of code that makes doing complex things, like talking
-to a DHT11, simpler. The library we will use has all the code to interact and retrieve
-values from the sensor.
+to a DHT11, simpler. The library we will use has all the code to read values from the sensor.
 
 In this segment we will read from the DHT11 and send the readings to a computer.
 
