@@ -57,13 +57,15 @@ SCL        |    SCL
 GND        |    GND
 3v3        |    PWR
 
+
+**BMP180 diagram:**
+
 Arduino    |    Rain sensor
 -----------|----------------
 Pin8       |    DO
 GND        |    GND
 PWR        |    PWR
 
-**BMP180 diagram:**
 
 
 ##### Licensing:
