@@ -63,6 +63,7 @@ and if neither of the sensors see a line go straight.
 /*
  A simple line follower using 2 IR sensors
 
+
  The logic used here is simple:
 
  If the left sensor is on the line         > turn left
@@ -183,3 +184,9 @@ if ((rVal == 0) && (lVal == 0)) {
 ```
 This is done since most people put a black "ending line" at the end of the track
 when the bot sees it the bot stops.
+
+##### Licensing:
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+All the code in this tutorial is licensed under the MIT license, the exact terms for which can be found [here](https://github.com/afshaan4/other_arduino_projects/blob/master/LICENSE)
