@@ -68,14 +68,11 @@ and the negative terminal into *GND*.
 
 ## Wiring
 
-
 Arduino     |     Motor driver
 ------------|-----------------
 pin 0       |     Enable motor a
 pin 1       |     Motor a pin 1
 pin 2       |     Motor a pin 2
-pin 3       |     PWR
-pin 4       |     GND
 pin 5       |     Enable motor b
 pin 6       |     Motor b pin 2
 pin 7       |     Motor b pin 1
