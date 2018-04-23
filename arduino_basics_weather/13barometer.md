@@ -47,7 +47,7 @@ VIN          |    3v3
 
 **Diagram:**
 
-<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/screen.png" alt="screen" width="600" height="790" />
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/BMP180.png" alt="dht11_4" width="597" height="640" />
 
 ### The code
 ```
