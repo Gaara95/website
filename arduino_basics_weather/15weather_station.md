@@ -46,7 +46,7 @@ GND        |    GND
 <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/dht11.png" alt="dht11_4" width="750" height="600" />
 
 **BMP180:**
-Warning! The BMP180 is a 3volt sensor do not power it with 5volts.
+Warning! The BMP180 is a 3 volt sensor do not power it with 5volts.
 On different Arduinos the SDA and SCL pins are different so look up which
 pins the SCL and SDA pins are for your specific Arduino.
 
@@ -57,9 +57,10 @@ SCL        |    SCL
 GND        |    GND
 3v3        |    PWR
 
-<img class="aligncenter wp-image-147 size-full" src="" alt="dht11_4" width="750" height="600" />
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/BMP180.png" alt="dht11_4" width="597" height="640" />
 
 **Rain sensor:**
+
 Arduino    |    Rain sensor
 -----------|----------------
 Pin8       |    DO
