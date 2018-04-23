@@ -10,13 +10,7 @@ front of the sensor the light gets absorbed by the black surface. This way we ca
 detect black lines on lightly colored surfaces.
 
 The reason we use 2 sensors is: we put two on the robot so they are on either side of
-the line:
-
-<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/motion_alarm.png" alt="motion" width="644" height="588" />
-
-If the line bends then the sensor on that side sees the line:
-
-<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/motion_alarm.png" alt="motion" width="644" height="588" />
+the line, if the line bends then the sensor on that side sees the line.
 
 ### Line following logic:
 
@@ -58,7 +52,7 @@ Assemble the robot chassis using the instructions from the [object avoiding robo
 
 **Diagram:**
 
-<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/motion_alarm.png" alt="motion" width="644" height="588" />
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/line_follower.png" alt="motion" width="433" height="600" />
 
 ### code
 ```

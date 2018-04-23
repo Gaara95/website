@@ -31,7 +31,7 @@ GND         |  GND for motors
 
 **Diagram:**
 
-<img class="wp-image-112 size-full aligncenter" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/03/motors.png" alt="" width="600" height="599" />
+<img class="wp-image-112 size-full aligncenter" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/motors.png" alt="" width="600" height="599" />
 
 ### The code
 The motor driver takes three inputs per motor: *motor enable*, *motor pin1*, and *motor pin2*.
