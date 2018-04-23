@@ -10,24 +10,24 @@ allows us to switch on and off motors and is controlled by the Arduino.
 **Parts:**
 
 * An Arduino.
-* A DC motor.
+* 2 DC motors.
 * An L293D motor driver board.
 * A 9v battery and battery clip.
 
 ### Wiring
 
-Arduino | Motor driver
+Arduino     |  Motor driver
 ------------|-------------------
-Pin0 | Enable motor a
-Pin1 | Motor a pin 1
-Pin2 | Motor a pin 2
-Pin3 | PWR
-Pin4 | GND
+Pin0        |  Enable motor a
+Pin1        |  Motor a pin 1
+Pin2        |  Motor a pin 2
+Pin3        |  PWR
+Pin4        |  GND
 
-9v battery | Motor driver
+9v battery  |  Motor driver
 ------------|------------------
-9v | PWR to motors
-GND | GND for motors
+9v          |  PWR to motors
+GND         |  GND for motors
 
 **Diagram:**
 
@@ -35,7 +35,8 @@ GND | GND for motors
 
 ### The code
 The motor driver takes three inputs per motor: *motor enable*, *motor pin1*, and *motor pin2*.
-If *motor enable* is HIGH the motor gets power and if it is LOW the motor does not get power.
+If *motor enable* is HIGH the motor gets power and if it is LOW the motor does not get power, for our purposes we want the motor to be on so we just connect the *enable*
+pins for both motors to 5v.
 
 *motor pin1* and *motor pin2* are used to control the direction the motor spins in:
 if *motor pin1* is HIGH and *motor pin2* is LOW the motor spins in one direction;
@@ -44,76 +45,79 @@ if *motor pin1* and *motor pin2* are both LOW the motor stops moving.
 That way we can control which way the motor spins and turn it on and off.
 
 ```
-//makes a DC motor spin one direction for a second then the other
+/*
+ makes two DC motors spin one direction for a second then the other
 
-//assign the motor controller pins
-int ea = 0; //enable motor a
-int a1 = 1; //motor a pin 1
-int a2 = 2; //motor a pin 2
-int V = 3; //power to the motor controller
-int G = 4; //ground to the motor controller
+ Note: The L293D has "motor-enable" pins, these are used to turn on and off the motors
+ you an also control the speed of the motors by sending a PWM to these pins.
+ For this example give the enable pins 5 volts.
+
+ If you board doesn't have these pin or they are shorted to power
+ and you don't want to do speed control stuff then you don't need to give them power.
+*/
+
+// assign the motor controller pins
+int a1 = 2; // motor a pin 1
+int a2 = 3; // motor a pin 2
+int b1 = 4; // motor b pin 1
+int b2 = 5; // motor b pin 2
 
 void setup() {
-  //setup the motor controller pins
-  pinMode(ea, OUTPUT); //enable motor a is an output
+  // setup the motor controller pins
   pinMode(a1, OUTPUT);
   pinMode(a2, OUTPUT);
-  pinMode(V, OUTPUT);
-  pinMode(G, INPUT);
-
-  digitalWrite(ea, HIGH); //turn on motor a
-  //power on the controller board
-  digitalWrite(V, HIGH);
-  digitalWrite(G, LOW);
+  pinMode(b1, OUTPUT);
+  pinMode(b2, OUTPUT);
 }
 
 void loop() {
-  //turn on pin 1 and turn off pin 2
-  //the motor spins one way
+  // turn on pin 1 and turn off pin 2
+  // the motors spins one way
   digitalWrite(a1, HIGH);
   digitalWrite(a2, LOW);
-  delay(1000); //let it spin for a second
-  //turn off pin 1 and turn on pin 2
-  //the motor spins the other way
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(1000); // let it spin for a second
+  // turn off pin 1 and turn on pin 2
+  // the motors spins the other way
   digitalWrite(a1, LOW);
   digitalWrite(a2, HIGH);
-  delay(1000); //let it spin for a second
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, HIGH);
+  delay(1000); // let it spin for a second
 }
 ```
 How does this work?
 
-We enable one motor and set *motor pin1* and *motor pin2* as outputs, and use
-pins 3 and 4 on the Arduino to power the motor driver, not the motors, since the
-L293D chip only needs 20 milliamps to function:
+We set *a1, a2, b1, and b2* as outputs, *a1* and *a2* are for the first motor
+and *b1* and *b2* are for the other motor:
 ```
 void setup() {
-  //setup the motor controller pins
-  pinMode(ea, OUTPUT); //enable motor a is an output
+  // setup the motor controller pins
   pinMode(a1, OUTPUT);
   pinMode(a2, OUTPUT);
-  pinMode(V, OUTPUT);
-  pinMode(G, INPUT);
-
-  digitalWrite(ea, HIGH); //turn on motor a
-  //power on the controller board
-  digitalWrite(V, HIGH);
-  digitalWrite(G, LOW);
+  pinMode(b1, OUTPUT);
+  pinMode(b2, OUTPUT);
 }
 ```
-Then in the loop we just spin the motor one way for a second, then the other
+Then in the loop we just spin the motors one way for a second, then the other
 way for a second:
 ```
 void loop() {
-  //turn on pin 1 and turn off pin 2
-  //the motor spins one way
+  // turn on pin 1 and turn off pin 2
+  // the motors spins one way
   digitalWrite(a1, HIGH);
   digitalWrite(a2, LOW);
-  delay(1000); //let it spin for a second
-  //turn off pin 1 and turn on pin 2
-  //the motor spins the other way
+  digitalWrite(b1, HIGH);
+  digitalWrite(b2, LOW);
+  delay(1000); // let it spin for a second
+  // turn off pin 1 and turn on pin 2
+  // the motors spins the other way
   digitalWrite(a1, LOW);
   digitalWrite(a2, HIGH);
-  delay(1000); //let it spin for a second
+  digitalWrite(b1, LOW);
+  digitalWrite(b2, HIGH);
+  delay(1000); // let it spin for a second
 }
 ```
 ##### Licensing:

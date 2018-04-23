@@ -152,6 +152,7 @@ if ((rVal == 1) && (lVal == 1)) {
   digitalWrite(b2, LOW);
 }
 ```
+
 If the left one sees a line turn left:
 ```
 // if the left sensor is on the line, turn left
@@ -162,6 +163,7 @@ if ((rVal == 1) && (lVal == 0)) {
   digitalWrite(b2, LOW);
 }
 ```
+
 If the right one sees a line turn right:
 ```
 // if the right sensor is on the line, turn right
@@ -172,6 +174,7 @@ if ((rVal == 0) && (lVal == 1)) {
   digitalWrite(b2, LOW);
 }
 ```
+
 If both see a line stop:
 ```
 // if both sensors are on the line, stop
