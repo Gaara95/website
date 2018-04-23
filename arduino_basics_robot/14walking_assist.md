@@ -37,7 +37,7 @@ and one on the right, this way the user can tell where the obstacle is.
 
 **Diagram:**
 
-<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/motion_alarm.png" alt="motion" width="644" height="588" />
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/walking_assist.png" alt="motion" width="600" height="600" />
 
 ##### Licensing:
 

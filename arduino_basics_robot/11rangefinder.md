@@ -1,8 +1,8 @@
 Now lets use another complex sensor: an ultrasonic rangefinder, these use ultrasonic
-sound to tell how far away an object is from it, exactly like [bats echolocation](https://en.wikipedia.org/wiki/Bat#Echolocation).
-It does this by sending an ultrasonic *ping* and then waiting for it to return,
-by measuring how long it takes for the *ping* to return we can calculate how far
-an object is from it.
+sound to tell how far away an object is from it, like a [bats echolocation](https://en.wikipedia.org/wiki/Bat#Echolocation).
+It does this by sending an ultrasonic *ping* if there is something in the way
+the *ping* bounces off the surface, by measuring how long it takes for the *ping*
+to return we can calculate how far an object is from the sensor.
 
 For this segment we will make an Arduino blink an LED, or buzz a buzzer(or both)
 at a rate dependent on how close an object is to it.

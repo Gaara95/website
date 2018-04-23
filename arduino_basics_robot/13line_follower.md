@@ -37,6 +37,8 @@ and if neither of the sensors see a line go straight.
 * Various screws and bolts to mount all this stuff to the robot chassis.
 * A screwdriver.
 
+Assemble the robot chassis using the instructions from the [object avoiding robot](https://aaalearn.mystagingwebsite.com/2018/04/arduino-summer-camp-obstacle-avoiding-robot/) segment.
+
 ### Wiring
 
 | Arduino        | IR sensors     |
