@@ -61,7 +61,7 @@ and the negative terminal into *GND*.
 
   <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly6.jpg" alt="assembly6" width="601" height="600" />
 
-* Use screws to mount the ultrasonic sensor to the front of the chassis:
+* Tape the ultrasonic sensor to the front of the chassis:
 
   <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/assembly7.jpg" alt="assembly1" width="746" height="600" />
 
@@ -93,7 +93,7 @@ terminalB2       |     motorB wire 2
 
 **Diagram:**
 
-<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/rover.png" alt="rover" width="600" height="600" />
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/04/obstacle_avoider.png" alt="rover" width="600" height="600" />
 
 ### The code
 ```
