@@ -1,4 +1,4 @@
-DC motors are great for robots on wheels, but if you need more accurate control
+DC motors are great for wheeled robots, but if you need more accurate control
 of the motors position you should use a servo motor.
 Servo motors can be made to turn to a specific angle ranging from 0 to 180
 which makes them great for making something like a robot arm.

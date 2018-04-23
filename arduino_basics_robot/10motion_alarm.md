@@ -1,9 +1,9 @@
-Now lets use a more advanced sensor: a PIR motion sensor, which is  basically an infrared light
-detector, when a person or object moves in the sensors field of view they cause changes
-in the temperature across the room, the sensor sees these changes in temperature
-(which is changes in infrared light) as movement.
+Now lets use an advanced sensor: a PIR motion sensor, which is an infrared light
+detector, when a person or object moves in the sensors field of view they cause
+changes in the temperature across the room, the sensor sees these changes in
+temperature (which are changes in infrared light) as movement.
 
-The PIR sensors signal pin is an Open-collector which means when it detects motion
+The PIR sensors signal pin is an "Open-collector" which means when it detects motion
 it pulls its output pin *LOW* and when there is no motion detected the pin is left floating
 (it is not set HIGH or LOW), this means that we need to pull the pin up to prevent noise.
 Luckily the Arduino has built-in pull up resistors on most of its pins.
@@ -14,7 +14,7 @@ and send a message to a computer whenever it detects motion.
 **Parts:**
 
 * An Arduino.
-* A PIR motion sensor (also called a D-sun sometimes).
+* A PIR motion sensor.
 * A buzzer.
 * A breadboard.
 
@@ -70,8 +70,8 @@ void loop(){
 }
 ```
 
-In the setup function we set *MOTION_PIN* as an *INPUT_PULLUP*, this sets it as an input
-and pulls it up to 5v.
+In the *setup()* function we set *MOTION_PIN* as an *INPUT_PULLUP*, this sets it
+as an input and pulls it up to 5v.
 ```
 pinMode(MOTION_PIN, INPUT_PULLUP);
 ```
