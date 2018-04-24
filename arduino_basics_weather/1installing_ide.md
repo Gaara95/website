@@ -11,7 +11,7 @@ Go to the Arduino downloads page and download the Arduino IDE for your OS, you w
 
 Follow the installation instructions for your OS.
 
-**For Linux**
+**For GNU/Linux**
 
 * Extract the zip file you downloaded.
 * Open the arduino-1.6.x folder created by the extraction process and find install.sh
