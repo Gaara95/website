@@ -22,7 +22,7 @@ editors like Atom and Sublime Text, then we copy it over from this repo to our s
 
 ## Post structure:
 
-* Each section in a post should be its own separate post, except where that would
+* Each topic of a course should be its own separate post, except where that would
   be unnecessary, this makes navigation easier and pages load faster.
 
 * The first post of a series of posts should be tagged `featured` so it comes up
