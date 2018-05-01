@@ -1,1 +1,3 @@
+# exclude the folder with the 4k copies of the photos
 
+/fullres_photos
