@@ -22,8 +22,10 @@ You will need to have moderate soldering skills and about
 
 * A soldering iron and all the soldering stuff.
 
+
 ### Wiring
 
+<img class="aligncenter wp-image-110 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/led_cube_wiring.png" alt="" width="861" height="600" />
 
 ### The code
 ```
