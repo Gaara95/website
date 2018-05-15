@@ -134,9 +134,20 @@ to the pins shown in the wiring diagram.
 
 <img class="aligncenter wp-image-110 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/led_cube_wiring.png" alt="diagram" width="861" height="600" />
 
-### The code
-```
+So as shown in the diagram the cube has 27 LEDs in a configuration of 9 vertical
+columns by 3 horizontal planes.
+To drive all those LEDs I used multiplexing (like everyone else), so as you know
+all the LEDs on a plane have a common ground pin (cathode), and all the LEDs
+in a column have a common power pin (anode).
+This gives me 3 ground pins and 9 power pins, so to turn on an LED you just give
+it's column power and pull it's plane to ground.
 
+
+### The code
+
+For the sake of simplicity the code below just turns on all the LEDs in the cube
+
+```
 /*
  This code turns on all the LEDs on a 3x3x3 LED cube.
 
@@ -214,6 +225,37 @@ void loop() {
 	digitalWrite(c5, HIGH);
 }
 ```
+
+At the bottom of the setup function I make all the planes go "HIGH", this is done
+because the pins default to "LOW" and so the all the LEDs in the cube light up
+the moment you power on the Arduino. Making them go HIGH turns them off.
+```
+digitalWrite(plane1, HIGH);
+digitalWrite(plane2, HIGH);
+digitalWrite(plane3, HIGH);
+```
+Then in loop we start by pulling the planes to ground:
+```
+// pull all the planes to ground.
+digitalWrite(plane1, LOW);
+digitalWrite(plane2, LOW);
+digitalWrite(plane3, LOW);
+```
+
+And then giving power to all the columns:
+```
+// power all the columns.
+digitalWrite(c1, HIGH);
+digitalWrite(c2, HIGH);
+digitalWrite(c3, HIGH);
+digitalWrite(c6, HIGH);
+digitalWrite(c9, HIGH);
+digitalWrite(c8, HIGH);
+digitalWrite(c7, HIGH);
+digitalWrite(c4, HIGH);
+digitalWrite(c5, HIGH);
+```
+
 
 ##### Licensing:
 
