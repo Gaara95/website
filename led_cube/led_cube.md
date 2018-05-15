@@ -1,4 +1,4 @@
-So for this project I wanted to make an LED cube, but as a "shield" for an Arduino
+For this project I wanted to make an LED cube, but as a "shield" for an Arduino
 UNO, an Arduino shield is a board that plugs into the Arduinos pins and has
 a bunch of circuitry on it, these are great when you want to add a complex thing
 like a radio module to your Arduino, you just get a radio module shield and plug
