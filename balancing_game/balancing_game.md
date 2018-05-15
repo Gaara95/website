@@ -2,14 +2,15 @@ This project is a simple balancing game, it has 6 LEDs to display your "progress
 and an accelerometer to measure tilt.
 You put the circuit on a plank then put the plank on a tube and try to balance
 on the plank, the longer you stay balanced more LEDs turn on, and when all the LEDs
-turn on the Arduino flashed all the LEDs on and off in a "celebration" animation.
+turn on the Arduino flashes all the LEDs on and off in a "celebration" animation.
 If you lose balance however the Arduino resets you progress, turns off all the LEDs
 and starts the game from the beginning.
 
-This project is based on a thing I saw on twitter: https://twitter.com/morrill_rob/status/993850732485918720?s=09
+This project is based on a thing I <a href="https://twitter.com/morrill_rob/status/993850732485918720?s=09">saw on twitter</a>
 
 
 **Parts:**
+
 * An Arduino.
 * An MPU 6050 accelerometer/gyroscope.
 * 6 LEDs.
@@ -199,7 +200,7 @@ the accelerometer is tilted.
 
 **Communicating with the sensor:**
 Since this is an I2C sensor, we use the *wire* library to talk to it, if you want
-to read more about I2C read this article by Sparkfun: https://learn.sparkfun.com/tutorials/i2c
+to read more about I2C read this tutorial by <a href="https://learn.sparkfun.com/tutorials/i2c">Sparkfun</a>
 ```
 #include<Wire.h>
 ```
@@ -259,4 +260,4 @@ be able to figure out how it works and what it does pretty easily.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 
-All the code in this tutorial is licensed under the MIT license, the exact terms for which can be found here: http://mit-license.org/
+All the code in this tutorial is licensed under the MIT license, the exact terms for which can be found <a href="https://mit-license.org/">here</a>
