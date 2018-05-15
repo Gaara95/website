@@ -27,12 +27,13 @@ You will need to have moderate soldering skills and about
   it looks like <a href="https://duckduckgo.com/?q=pliers+with+a+rubber+band&t=ffab&atb=v100-7&iax=images&ia=images&iai=http%3A%2F%2Fblog.espares.co.uk%2Fwp-content%2Fuploads%2Fsites%2F28%2F2017%2F01%2FPliers-With-A-Rubber-Band-Holding-Screws.jpg">this</a>
 * Tweezers.
 
+
 ### Building the cube
 To make the cube I made a bunch of bends and soldered the LEDs to each other, like so:
 
 **Bend 1**
 
-Bend both of the pins on each LED away from each other til they are horizontal,
+Bend both of the pins on each LED away from each other till they are horizontal,
 like this:
 
 <img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/bend1.jpg" alt="bend 1" width="815" height="600" />
@@ -85,7 +86,31 @@ Here is where I made a mistake and realized that connecting the "layers" wont be
 neat, so if you find a better way do it like that.
 
 But anyway the idea is to solder all the cathodes of the LEDs in a horizontal plane
-to each other
+to each other:
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/solder3.jpg" alt="solder 3" width="600" height="610" />
+
+Now the connections of the anodes and cathodes looks like this:
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/multiplexing2.jpg" alt="connections cube" width="632" height="610" />
+
+The cube now has 3 planes of cathodes (blue) and 9 columns of anodes (red).
+
+**Soldering step 4**
+
+Now that we have a cube lets make it a shield, to do that send the anodes of the LEDs the bottom of the cube through the holes in the perf board:
+
+<img class="aligncenter wp-image-147 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/solder4.jpg" alt="connections cube" width="600" height="713" />
+
+Also solder on the male breakaway headers onto the perf board such that they fit
+into the pins of the Arduino.
+
+**Soldering step 5**
+
+Using the chart and diagram from the Wiring section, solder wires from the columns
+of anodes on the cube to the pins on the shield.
+Also solder the three 2k resistors to each plane of cathodes and connect the resistors
+to the pins shown in the wiring diagram.
 
 ### Wiring
 
@@ -112,10 +137,86 @@ to each other
 ### The code
 ```
 
+/*
+ This code turns on all the LEDs on a 3x3x3 LED cube.
+
+ I'm using multiplexing to drive all the 27 LEDs this cube uses, so:
+
+ * Each vertical column of LEDs has a common anode.
+ * Each horizontal plane of LEDs has a common cathode.
+
+ This way if I connect column 1 to power and plane 1 to ground
+ the LED at 1,0,0 turns on(read: top corner)
+
+ I'm using digital pins 2 to 7 and analog pins 0 to 5 since the spacing
+ of the holes on my perf board doesn't allow me to use pins 8 to 13.
+*/
+
+// the planes of LEDs
+const int plane1 = 7;
+const int plane2 = 6;
+const int plane3 = 5;
+
+// the columns of LEDs
+const int c1 = 4;
+const int c2 = 3;
+const int c3 = 2;
+const int c4 = A0;
+const int c5 = A1;
+const int c6 = A2;
+const int c7 = A3;
+const int c8 = A4;
+const int c9 = A5;
+
+
+void setup() {
+	// set everything as an output
+	pinMode(plane1, OUTPUT);
+	pinMode(plane2, OUTPUT);
+	pinMode(plane3, OUTPUT);
+
+	pinMode(c1, OUTPUT);
+	pinMode(c2, OUTPUT);
+	pinMode(c3, OUTPUT);
+	pinMode(c4, OUTPUT);
+	pinMode(c5, OUTPUT);
+	pinMode(c6, OUTPUT);
+	pinMode(c7, OUTPUT);
+	pinMode(c8, OUTPUT);
+	pinMode(c9, OUTPUT);
+
+	// set the plane pins as 'HIGH' first this stops a weird effect where they
+	// all go 'LOW' by default and all the LEDs turn on.
+	digitalWrite(plane1, HIGH);
+	digitalWrite(plane2, HIGH);
+	digitalWrite(plane3, HIGH);
+}
+
+/*
+Turn on all the LEDs in the cube
+*/
+
+void loop() {
+	// pull all the planes to ground.
+	digitalWrite(plane1, LOW);
+	digitalWrite(plane2, LOW);
+	digitalWrite(plane3, LOW);
+
+	// power all the columns.
+	digitalWrite(c1, HIGH);
+	digitalWrite(c2, HIGH);
+	digitalWrite(c3, HIGH);
+	digitalWrite(c6, HIGH);
+	digitalWrite(c9, HIGH);
+	digitalWrite(c8, HIGH);
+	digitalWrite(c7, HIGH);
+	digitalWrite(c4, HIGH);
+	digitalWrite(c5, HIGH);
+}
 ```
 
 ##### Licensing:
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 
-All the code in this tutorial is licensed under the MIT license, the exact terms for which can be found [here](https://github.com/afshaan4/other_arduino_projects/blob/master/LICENSE)
+All the code in this tutorial is licensed under the MIT license, the exact terms for which can be found [here](https://github.com/sit-on-cushions-we-must/led_cube/blob/master/LICENSE)
