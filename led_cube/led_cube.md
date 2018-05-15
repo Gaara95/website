@@ -16,16 +16,36 @@ You will need to have moderate soldering skills and about
 * 27 diffused LEDs, don't use the clear ones like I did
 * 3 2k resistors.
 * A piece of perf board big enough for you Arduino.
+* 12 male breakaway header like [these](https://duckduckgo.com/?q=male+headers&t=ffab&atb=v100-7&iax=images&ia=images&iai=http%3A%2F%2Fktechnics.com%2Fwp-content%2Fuploads%2F2016%2F02%2F1x26_male_pin.jpg)
 * Wires.
 
 **Tools:**
 
 * A soldering iron and all the soldering stuff.
+* A pair of pliers and a rubber band as a makeshift
+  vise to hold the LEDs in place while soldering,
+  it looks like <a href="https://duckduckgo.com/?q=pliers+with+a+rubber+band&t=ffab&atb=v100-7&iax=images&ia=images&iai=http%3A%2F%2Fblog.espares.co.uk%2Fwp-content%2Fuploads%2Fsites%2F28%2F2017%2F01%2FPliers-With-A-Rubber-Band-Holding-Screws.jpg">this</a> \
+  * Tweezers.
 
 
 ### Wiring
 
-<img class="aligncenter wp-image-110 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/led_cube_wiring.png" alt="" width="861" height="600" />
+| Arduino        | The LED cube   |
+| :------------- | :------------- |
+| Digital pin7   | Plane 1        |
+| Digital pin6   | Plane 2        |
+| Digital pin5   | Plane 3        |
+| Digital pin4   | Column 1       |
+| Digital pin3   | Column 2       |
+| Digital pin2   | Column 3       |
+| Analog pin0    | Column 4       |
+| Analog pin1    | Column 5       |
+| Analog pin2    | Column 6       |
+| Analog pin3    | Column 7       |
+| Analog pin4    | Column 8       |
+| Analog pin5    | Column 9       |
+
+<img class="aligncenter wp-image-110 size-full" src="https://aaalearn.mystagingwebsite.com/wp-content/uploads/2018/05/led_cube_wiring.png" alt="diagram" width="861" height="600" />
 
 ### The code
 ```
