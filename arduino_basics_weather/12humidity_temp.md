@@ -136,7 +136,7 @@ void loop() {
 }
 ```
 
-To use a library in our code we need *include* it, we do this by typing:
+To use a library in our code we need to *include* it, we do this by typing:
 ```
 #include "DHT.h"
 ```

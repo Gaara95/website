@@ -265,7 +265,7 @@ void loop() {
 ```
 This project has 4 sensors reading data and the screen we used only has 2 lines
 of 16 characters to display all that, clearly all the readings wont fit on the screen at once,
-so each set of readings is made into a "page" i.e. we just display them one after the
+so each set of readings is made into a "page" i.e. we just display them one after the other
 with a delay in between to set how long they stay on the screen(in our case 3 seconds).
 And after the 3 second delay we use *lcd.clear()* to remove previous readings from the screen.
 

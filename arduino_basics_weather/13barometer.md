@@ -153,7 +153,7 @@ void loop() {
           Serial.print(P*0.0295333727,2);
           Serial.println(" inHg");
 
-          // The pressure sensor returns abolute pressure, which varies with altitude.
+          // The pressure sensor returns absolute pressure, which varies with altitude.
           // To remove the effects of altitude, use the sealevel function and your current altitude.
           // This number is commonly used in weather reports.
           // Parameters: P = absolute pressure in mb, ALTITUDE = current altitude in m.

@@ -15,7 +15,7 @@ the Arduino we will need to use a large resistor to "load down" the piezo.
 
 ### Wiring
 
-Put the resisitor between the pin you are reading from and ground.
+Put the resistor between the pin you are reading from and ground.
 
 Arduino   |   piezo
 ----------|----------

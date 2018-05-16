@@ -10,7 +10,7 @@ There are sixteen pins on the screen, start from the pin labeled *1*.
 
 * Pin 1 to GND.
 * Pin 2 to 5v.
-* Pin 3 to GND through a 1k resisitor, and to 5v through a 10k resistor.
+* Pin 3 to GND through a 1k resistor, and to 5v through a 10k resistor.
 * Pin 4 to Arduino pin 12.
 * Pin 5 to GND.
 * Pin 6 to Arduino pin 11.
